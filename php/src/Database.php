@@ -109,6 +109,11 @@ class Database
             PDO::SQLSRV_ATTR_ENCODING     => PDO::SQLSRV_ENCODING_UTF8,
         ]);
 
+        // Forzar el contexto de BD correcto — previene que la BD por defecto
+        // del login de SQL Server sobreescriba el parametro Database del DSN.
+        $safeDb = str_replace([']', '['], '', $database);
+        $pdo->exec("USE [$safeDb]");
+
         self::$pool[$key] = $pdo;
         return $pdo;
     }

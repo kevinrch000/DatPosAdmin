@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/../../src/Auth.php';
 require_once __DIR__ . '/../../src/Json.php';
+require_once __DIR__ . '/../../src/Database.php';
 require_once __DIR__ . '/../../src/BL/BLUser.php';
 require_once __DIR__ . '/../../src/BE/BEUser.php';
 
@@ -45,7 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
         if ($error === '') {
-            $error = 'Usuario o Contraseña incorrecta';
+            // Diagnostico: mostrar contra que BD se valido (quitar en produccion)
+            $dbInfo = '';
+            try {
+                $dbActual = Database::pdo()->query("SELECT DB_NAME()")->fetchColumn();
+                $dbInfo = " [BD: $dbActual]";
+            } catch (Throwable $ignore) {}
+            $error = 'Usuario o Contraseña incorrecta' . $dbInfo;
         }
     }
 }
