@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DatPOSWeb", "DatPOSWeb.vbproj", "{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BL", "..\BL\BL.vbproj", "{512606EA-573F-48C6-89EC-66B5526E7161}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BE", "..\BE\BE.vbproj", "{0E286F50-2272-4FEE-9A6E-401CD3742BA7}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DA", "..\DA\DA.vbproj", "{B9DDBC97-F686-46EB-993A-D79449648C64}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://microsigsac.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DatPOSWeb.vbproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\BE\\BE.vbproj
+		SccProjectName2 = ../BE
+		SccLocalPath2 = ..\\BE
+		SccProjectUniqueName3 = ..\\BL\\BL.vbproj
+		SccProjectName3 = ../BL
+		SccLocalPath3 = ..\\BL
+		SccProjectUniqueName4 = ..\\DA\\DA.vbproj
+		SccProjectName4 = ../DA
+		SccLocalPath4 = ..\\DA
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512606EA-573F-48C6-89EC-66B5526E7161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512606EA-573F-48C6-89EC-66B5526E7161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512606EA-573F-48C6-89EC-66B5526E7161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512606EA-573F-48C6-89EC-66B5526E7161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E286F50-2272-4FEE-9A6E-401CD3742BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E286F50-2272-4FEE-9A6E-401CD3742BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E286F50-2272-4FEE-9A6E-401CD3742BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E286F50-2272-4FEE-9A6E-401CD3742BA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9DDBC97-F686-46EB-993A-D79449648C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9DDBC97-F686-46EB-993A-D79449648C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9DDBC97-F686-46EB-993A-D79449648C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9DDBC97-F686-46EB-993A-D79449648C64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

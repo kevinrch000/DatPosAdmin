@@ -1,0 +1,54 @@
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\bin\Debug\DA.dll
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\bin\Debug\DA.pdb
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\bin\Debug\DA.xml
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\bin\Debug\BE.dll
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\bin\Debug\BE.pdb
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\bin\Debug\BE.xml
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\obj\Debug\DA.vbprojResolveAssemblyReference.cache
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\obj\Debug\DA.Resources.resources
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\obj\Debug\DA.vbproj.GenerateResource.Cache
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\obj\Debug\DA.dll
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\obj\Debug\DA.xml
+C:\Users\Ivan\Documents\WebAdmin\DatPos_web_admin\DA\obj\Debug\DA.pdb
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.dll
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.pdb
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.xml
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.dll
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.pdb
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.xml
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.Resources.resources
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.GenerateResource.Cache
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.dll
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.xml
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.pdb
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.AssemblyReference.cache
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.CoreCompileInputs.cache
+C:\Users\desarrollo2\Desktop\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.Up2Date
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.dll
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.pdb
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.xml
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.dll
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.pdb
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.xml
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.Resources.resources
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.GenerateResource.Cache
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.dll
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.xml
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.pdb
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.AssemblyReference.cache
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.CoreCompileInputs.cache
+C:\Users\rujel\Downloads\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.Up2Date
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.dll
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.pdb
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\DA.xml
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.dll
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.pdb
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\bin\Debug\BE.xml
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.Resources.resources
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.GenerateResource.Cache
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.dll
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.xml
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.pdb
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.AssemblyReference.cache
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.CoreCompileInputs.cache
+E:\MICROSERVICEDATPOS\DATPOS 25-09-14\DATPOS 22-09-14\DATPOS\DatPos_web_admin\DA\obj\Debug\DA.vbproj.Up2Date

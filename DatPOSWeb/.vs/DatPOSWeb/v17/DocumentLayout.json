@@ -1,0 +1,699 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\consultausuarios.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\consultausuarios.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\consultaempresas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\consultaempresas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\administrarcompanias.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\administrarcompanias.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\account\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:account\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\site.master.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:site.master.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9DDBC97-F686-46EB-993A-D79449648C64}|..\\DA\\DA.vbproj|e:\\microservicedatpos\\datpos 25-09-14\\datpos 22-09-14\\datpos\\datpos_web_admin\\da\\daconexionsql.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9DDBC97-F686-46EB-993A-D79449648C64}|..\\DA\\DA.vbproj|e:\\microservicedatpos\\datpos 25-09-14\\datpos 22-09-14\\datpos\\datpos_web_admin\\da\\dausuario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|e:\\microservicedatpos\\datpos 25-09-14\\datpos 22-09-14\\datpos\\datpos_web_admin\\datposweb\\interfaces\\administrarusuarios.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\administrarusuarios.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\administrarusuarios.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\administrarusuarios.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\styles\\disenobotones.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:styles\\disenobotones.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\javascript\\comun.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:javascript\\comun.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\javascript\\usuario.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:javascript\\usuario.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\migadmin\\logon.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:migadmin\\logon.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|DA||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\migadmin\\logon.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:migadmin\\logon.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\global.asax.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:global.asax.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\javascript\\empresa.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:javascript\\empresa.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\administrarcompanias.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\administrarcompanias.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\interfaces\\consultaempresas.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:interfaces\\consultaempresas.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\javascript\\consultaempresas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:javascript\\consultaempresas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\actionresult.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{B9BAD3D9-060A-40B4-83DD-A6CF5B1DEC85}|DatPOSWeb.vbproj|solutionrelative:actionresult.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLEmpresa.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAHome.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLUsuario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUsuario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConexionSQL.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DARol.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEConsultaEmpresa.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLTipoDocumento.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUser.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEstado.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEMenu.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUbigeo.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DATipoDocumento.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUser.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEEmpresa.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUsuario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConsultaUsuarios.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEmpresa.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLUser.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConsultaEmpresas.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{512606EA-573F-48C6-89EC-66B5526E7161}|..\\BL\\BL.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLEmpresa.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9DDBC97-F686-46EB-993A-D79449648C64}|..\\DA\\DA.vbproj|E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEmpresa.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Account\\Login.aspx",
+              "RelativeDocumentMoniker": "Account\\Login.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Account\\Login.aspx",
+              "RelativeToolTip": "Account\\Login.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-14T15:12:09.24Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdministrarCompanias.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarCompanias.aspx",
+              "RelativeDocumentMoniker": "Interfaces\\AdministrarCompanias.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarCompanias.aspx",
+              "RelativeToolTip": "Interfaces\\AdministrarCompanias.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-14T23:40:41.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AdministrarUsuarios.aspx.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarUsuarios.aspx.vb",
+              "RelativeDocumentMoniker": "Interfaces\\AdministrarUsuarios.aspx.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarUsuarios.aspx.vb",
+              "RelativeToolTip": "Interfaces\\AdministrarUsuarios.aspx.vb",
+              "ViewState": "AgIAADwAAAAAAAAAAAAowFkAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:35:04.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Usuario.js",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\Usuario.js",
+              "RelativeDocumentMoniker": "Javascript\\Usuario.js",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\Usuario.js",
+              "RelativeToolTip": "Javascript\\Usuario.js",
+              "ViewState": "AgIAALYBAAAAAAAAAAAqwMsBAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-04-21T05:26:00.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Comun.js",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\Comun.js",
+              "RelativeDocumentMoniker": "Javascript\\Comun.js",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\Comun.js",
+              "RelativeToolTip": "Javascript\\Comun.js",
+              "ViewState": "AgIAALgAAAAAAAAAAAAmwNYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-04-21T05:51:33.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "disenoBotones.css",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Styles\\disenoBotones.css",
+              "RelativeDocumentMoniker": "Styles\\disenoBotones.css",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Styles\\disenoBotones.css",
+              "RelativeToolTip": "Styles\\disenoBotones.css",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-21T05:57:02.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Web.config",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAIwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-15T16:33:21.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Site.Master.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Site.Master.vb",
+              "RelativeDocumentMoniker": "Site.Master.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Site.Master.vb",
+              "RelativeToolTip": "Site.Master.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA3wBEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T18:40:09.525Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConsultaEmpresas.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\ConsultaEmpresas.aspx",
+              "RelativeDocumentMoniker": "Interfaces\\ConsultaEmpresas.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\ConsultaEmpresas.aspx",
+              "RelativeToolTip": "Interfaces\\ConsultaEmpresas.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-14T20:04:58.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsultaUsuarios.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\ConsultaUsuarios.aspx",
+              "RelativeDocumentMoniker": "Interfaces\\ConsultaUsuarios.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\ConsultaUsuarios.aspx",
+              "RelativeToolTip": "Interfaces\\ConsultaUsuarios.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-14T20:26:17.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AdministrarUsuarios.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarUsuarios.aspx",
+              "RelativeDocumentMoniker": "Interfaces\\AdministrarUsuarios.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarUsuarios.aspx",
+              "RelativeToolTip": "Interfaces\\AdministrarUsuarios.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-14T23:50:44.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DAUsuario.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUsuario.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUsuario.vb",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:18:31.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "BLUsuario.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLUsuario.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLUsuario.vb",
+              "ViewState": "AgIAABAAAAAAAAAAAAAcwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:20:57.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "DAHome.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAHome.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAHome.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T20:11:14.412Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DAConexionSQL.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConexionSQL.vb",
+              "RelativeDocumentMoniker": "..\\DA\\DAConexionSQL.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConexionSQL.vb",
+              "RelativeToolTip": "..\\DA\\DAConexionSQL.vb",
+              "ViewState": "AgIAADcAAAAAAAAAAAAYwEcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-21T13:35:55.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DAUsuario.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUsuario.vb",
+              "RelativeDocumentMoniker": "..\\DA\\DAUsuario.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUsuario.vb",
+              "RelativeToolTip": "..\\DA\\DAUsuario.vb",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAkwGQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-21T13:39:02.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "BLEmpresa.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLEmpresa.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLEmpresa.vb",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowC0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-21T06:13:01.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Site.Master",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Site.Master",
+              "RelativeDocumentMoniker": "Site.Master",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Site.Master",
+              "RelativeToolTip": "Site.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-15T18:36:19.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "DAConexionSQL.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConexionSQL.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConexionSQL.vb",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T18:59:32.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "DARol.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DARol.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DARol.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:55:41.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "BEConsultaEmpresa.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEConsultaEmpresa.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEConsultaEmpresa.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:56:10.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "BLTipoDocumento.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLTipoDocumento.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLTipoDocumento.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:56:16.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DA",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DA.vbproj",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DA.vbproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-15T20:04:22.913Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LogOn.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\migadmin\\LogOn.aspx",
+              "RelativeDocumentMoniker": "migadmin\\LogOn.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\migadmin\\LogOn.aspx",
+              "RelativeToolTip": "migadmin\\LogOn.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-15T17:06:44.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Home.aspx",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\Home.aspx",
+              "RelativeDocumentMoniker": "Interfaces\\Home.aspx",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\Home.aspx",
+              "RelativeToolTip": "Interfaces\\Home.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-15T21:19:02.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "DAUser.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUser.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAUser.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T20:11:21.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "DAEstado.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEstado.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEstado.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T20:11:26.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "BEMenu.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEMenu.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEMenu.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:56:07.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "BEUbigeo.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUbigeo.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUbigeo.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:56:06.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "DATipoDocumento.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DATipoDocumento.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DATipoDocumento.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:55:49.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "BEUser.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUser.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUser.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:21:07.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "BEEmpresa.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEEmpresa.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEEmpresa.vb",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAkwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:55:31.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "BEUsuario.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUsuario.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BE\\BEUsuario.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:20:51.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "DAConsultaUsuarios.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConsultaUsuarios.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConsultaUsuarios.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:13:25.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "DAEmpresa.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEmpresa.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEmpresa.vb",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAYwLcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T17:03:24.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "BLUser.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLUser.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLUser.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T19:21:02.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Empresa.js",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\Empresa.js",
+              "RelativeDocumentMoniker": "Javascript\\Empresa.js",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\Empresa.js",
+              "RelativeToolTip": "Javascript\\Empresa.js",
+              "ViewState": "AgIAANYBAAAAAAAAAAAqwOkBAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-04-15T17:21:14.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Global.asax.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Global.asax.vb",
+              "RelativeDocumentMoniker": "Global.asax.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Global.asax.vb",
+              "RelativeToolTip": "Global.asax.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T18:38:55.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "DAConsultaEmpresas.vb",
+              "DocumentMoniker": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConsultaEmpresas.vb",
+              "ToolTip": "C:\\Users\\rujel\\Downloads\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAConsultaEmpresas.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T16:34:18.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "LogOn.aspx.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\migadmin\\LogOn.aspx.vb",
+              "RelativeDocumentMoniker": "migadmin\\LogOn.aspx.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\migadmin\\LogOn.aspx.vb",
+              "RelativeToolTip": "migadmin\\LogOn.aspx.vb",
+              "ViewState": "AgIAAAwAAAAAAAAAAAArwBsAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T18:57:14.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ConsultaEmpresas.js",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\ConsultaEmpresas.js",
+              "RelativeDocumentMoniker": "Javascript\\ConsultaEmpresas.js",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Javascript\\ConsultaEmpresas.js",
+              "RelativeToolTip": "Javascript\\ConsultaEmpresas.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-04-15T16:41:53.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AdministrarCompanias.aspx.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarCompanias.aspx.vb",
+              "RelativeDocumentMoniker": "Interfaces\\AdministrarCompanias.aspx.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\AdministrarCompanias.aspx.vb",
+              "RelativeToolTip": "Interfaces\\AdministrarCompanias.aspx.vb",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAswKUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-14T23:51:04.498Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ActionResult.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\ActionResult.vb",
+              "RelativeDocumentMoniker": "ActionResult.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\ActionResult.vb",
+              "RelativeToolTip": "ActionResult.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-15T16:39:56.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ConsultaEmpresas.aspx.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\ConsultaEmpresas.aspx.vb",
+              "RelativeDocumentMoniker": "Interfaces\\ConsultaEmpresas.aspx.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DatPOSWeb\\Interfaces\\ConsultaEmpresas.aspx.vb",
+              "RelativeToolTip": "Interfaces\\ConsultaEmpresas.aspx.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-14T18:00:21.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "BLEmpresa.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLEmpresa.vb",
+              "RelativeDocumentMoniker": "..\\BL\\BLEmpresa.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\BL\\BLEmpresa.vb",
+              "RelativeToolTip": "..\\BL\\BLEmpresa.vb",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-14T23:45:02.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "DAEmpresa.vb",
+              "DocumentMoniker": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEmpresa.vb",
+              "RelativeDocumentMoniker": "..\\DA\\DAEmpresa.vb",
+              "ToolTip": "E:\\MICROSERVICEDATPOS\\DATPOS 25-09-14\\DATPOS 22-09-14\\DATPOS\\DatPos_web_admin\\DA\\DAEmpresa.vb",
+              "RelativeToolTip": "..\\DA\\DAEmpresa.vb",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-14T23:11:54.416Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
