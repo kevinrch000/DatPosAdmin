@@ -7,10 +7,15 @@ Migración a PHP + MySQL/MariaDB del proyecto original ASP.NET WebForms (VB.NET)
 ```
 php/
 ├── config/
-│   ├── config.example.php       # plantilla
+│   ├── config.example.php       # plantilla (db admin + db tenant)
 │   └── config.php               # tu configuración local (gitignored)
 ├── src/
-│   ├── Db.php                   # PDO + helper para llamar SPs
+│   ├── Database.php             # MULTI-TENANT: admin + tenant connections,
+│   │                            #   selectStored / executeStored /
+│   │                            #   selectStoredTenant / executeStoredTenant /
+│   │                            #   executeStoredTenantReturnId /
+│   │                            #   executeStoredTenantWithOutput
+│   ├── Db.php                   # alias delgado a Database (compat)
 │   ├── Auth.php                 # login/sesion (reemplaza Forms Auth)
 │   ├── Json.php                 # respuestas {"d": ...}
 │   ├── BE/                      # entidades (BEEmpresa, BEUsuario, ...)
@@ -108,14 +113,37 @@ El proyecto original tiene dos niveles de bases de datos:
 1. **DatPosAdmin** (master) – almacena empresas (`Empresas.cnombre_bd`) y los
    usuarios administradores. Los SPs `webDatpos_*Admin` actuan aqui.
 2. **BD por empresa** (`cnombre_bd` de cada Empresa) – almacena los usuarios
-   operativos de cada empresa. Los SPs `webDatpos_insertarUsuario`, etc.,
-   actuan ahi.
+   operativos de cada empresa. Los SPs `webDatpos_insertarUsuario`,
+   `webDatpos_editarUsuario`, `webDatpos_eliminarUsuario`, etc., actuan ahi.
 
-En esta migracion se implementan completamente los flujos de la BD master.
-Para los SPs de la BD hija (no incluidos en `DatPosAdmin.sql`), `DAUsuario`
-mantiene la firma y devuelve un resultado consistente; si necesitas escribir
-en las BDs hijas, agrega esos SPs en cada BD hija y extiende `DAUsuario` para
-abrir conexion adicional con `Db::pdo()` apuntando a `cnombre_bd`/`cnombre_servidor`.
+`Database` (en `src/Database.php`) maneja ambas conexiones:
+
+```php
+// Conexion admin (lee config['db'])
+$rows = Database::selectStored('webDatpos_consultaUsuarios');
+$ok   = Database::executeStored('webDatpos_insertarUsuarioAdmin', [...]);
+
+// Conexion tenant (abre conexion dinamica al server/bd de la empresa)
+$tenant = (object)[
+    'cnombre_servidor' => 'host:3306',
+    'cnombre_bd'       => 'BD_de_empresa',
+];
+$rows = Database::selectStoredTenant('webDatpos_listarItems', [], $tenant);
+$ok   = Database::executeStoredTenant('webDatpos_insertarUsuario', [...], $tenant);
+$id   = Database::executeStoredTenantReturnId('sp_crear', [...], $tenant);
+```
+
+`DAUsuario::InsertarUsuario` / `EditarUsuario` / `EliminarUsuario` ya estan
+cableados para resolver el tenant a partir de `Empresas.ccod_empresa` y
+delegar al SP correspondiente en la BD hija. Si la BD hija no esta
+configurada (`cnombre_servidor`/`cnombre_bd` vacios), solo persiste en
+`DatPosAdmin` y reporta exito (degradacion segura).
+
+Para que esto funcione end-to-end en produccion, las BDs hijas deben tener
+los SPs `webDatpos_insertarUsuario` / `webDatpos_editarUsuario` /
+`webDatpos_eliminarUsuario`. Esos SPs **no** estan en `DatPosAdmin.sql` (solo
+existen en cada BD de empresa); replicarlos esta fuera del alcance de este
+repo.
 
 ## Validar
 

@@ -4,6 +4,7 @@
  */
 
 require_once __DIR__ . '/../Db.php';
+require_once __DIR__ . '/../Database.php';
 require_once __DIR__ . '/../BE/BEUsuario.php';
 require_once __DIR__ . '/../BE/BEUser.php';
 
@@ -84,11 +85,13 @@ class DAUsuario
     }
 
     /**
-     * En el original, `InsertarUsuario` abria una conexion a la BD hija de la
-     * empresa (cnombre_bd) y llamaba a `webDatpos_insertarUsuario` ahi. En esta
-     * migracion solo administramos la BD principal (DatPosAdmin). Mantenemos
-     * la firma y devolvemos el formato `[ok, errNumber, errMessage, id_rol]`
-     * que el JS espera.
+     * Inserta el usuario en la BD HIJA de la empresa (multi-tenant).
+     * En el original llamaba a `webDatpos_insertarUsuario` via OtraConexion.
+     * Aqui usamos `Database::executeStoredTenant` que abre conexion dinamica
+     * a `cnombre_servidor`/`cnombre_bd` de la empresa destino.
+     *
+     * Si la BD hija no esta configurada (server/dbname vacios), solo se
+     * mantiene la insercion en DatPosAdmin (BD admin) y se reporta exito.
      *
      * @return array{0:bool,1:string,2:string,3:string}
      */
@@ -97,7 +100,23 @@ class DAUsuario
         if (!$this->existeEmpresa($obj->ccod_empresa)) {
             return [false, 'ERROR', "La empresa '{$obj->ccod_empresa}' no esta configurada.", ''];
         }
-        return [true, '0', '', (string)$obj->id_rol];
+        $tenant = $this->tenantFromEmpresa($obj->ccod_empresa);
+        if ($tenant === null) {
+            return [true, '0', '', (string)$obj->id_rol];
+        }
+        $ok = Database::executeStoredTenant('webDatpos_insertarUsuario', [
+            $obj->ccod_usuario,
+            $obj->cpassw,
+            $obj->cdsc_usuario,
+            (int)$obj->id_rol,
+            $obj->cmail,
+            $obj->ctelf,
+            $obj->ccelular,
+            $obj->cdirec,
+        ], $tenant);
+        return $ok
+            ? [true, '0', '', (string)$obj->id_rol]
+            : [false, 'ERROR', "No se pudo insertar el usuario en la BD hija ({$tenant->cnombre_bd}).", ''];
     }
 
     /**
@@ -108,14 +127,56 @@ class DAUsuario
         if (!$this->existeEmpresa($obj->ccod_empresa)) {
             return [false, 'ERROR', "La empresa '{$obj->ccod_empresa}' no esta configurada.", ''];
         }
-        return [true, '0', '', (string)$obj->id_rol];
+        $tenant = $this->tenantFromEmpresa($obj->ccod_empresa);
+        if ($tenant === null) {
+            return [true, '0', '', (string)$obj->id_rol];
+        }
+        $ok = Database::executeStoredTenant('webDatpos_editarUsuario', [
+            $obj->ccod_usuario,
+            $obj->cpassw,
+            $obj->cdsc_usuario,
+            (int)$obj->id_rol,
+            $obj->cmail,
+            $obj->ctelf,
+            $obj->ccelular,
+            $obj->cdirec,
+        ], $tenant);
+        return $ok
+            ? [true, '0', '', (string)$obj->id_rol]
+            : [false, 'ERROR', "No se pudo editar el usuario en la BD hija ({$tenant->cnombre_bd}).", ''];
     }
 
     public function EliminarUsuario(string $usuario, string $ipServidor, string $nomServidor, BEUser $conex): bool
     {
-        // En el original llama a un SP de la BD hija; aqui ya marcamos
-        // id_estado=0 via EliminarUsuarioAdmin.
-        return true;
+        // El admin (id_estado=0) ya se marca en EliminarUsuarioAdmin. Si la
+        // empresa tiene BD hija, replicamos el soft-delete ahi tambien.
+        if ($ipServidor === '' || $nomServidor === '') {
+            return true;
+        }
+        $tenant = (object)[
+            'cnombre_servidor' => $ipServidor,
+            'cnombre_bd'       => $nomServidor,
+        ];
+        return Database::executeStoredTenant('webDatpos_eliminarUsuario', [$usuario], $tenant);
+    }
+
+    /**
+     * Construye un "tenant" minimal (server/dbname) a partir del codigo de
+     * empresa, leyendo Empresas.cnombre_servidor y Empresas.cnombre_bd.
+     */
+    private function tenantFromEmpresa(string $ccod_empresa): ?object
+    {
+        $stmt = Db::pdo()->prepare(
+            'SELECT IFNULL(cnombre_servidor, "") AS cnombre_servidor,
+                    IFNULL(cnombre_bd, "")       AS cnombre_bd
+             FROM Empresas WHERE ccod_empresa = ?'
+        );
+        $stmt->execute([$ccod_empresa]);
+        $row = $stmt->fetch();
+        if (!$row || $row['cnombre_servidor'] === '' || $row['cnombre_bd'] === '') {
+            return null;
+        }
+        return (object)$row;
     }
 
     /**
