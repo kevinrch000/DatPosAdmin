@@ -766,3 +766,46 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- =====================================================================
+-- Datos semilla minimos para poder arrancar la app y hacer login.
+-- (Se pueden borrar luego en produccion: TRUNCATE Usuarios; TRUNCATE Empresas;)
+-- =====================================================================
+
+-- Ubigeo de ejemplo (Lima) para que los dropdowns no esten vacios.
+INSERT INTO Departamento (id_departamento, cdescripcion) VALUES
+    ('15', 'LIMA'),
+    ('07', 'CALLAO'),
+    ('04', 'AREQUIPA')
+ON DUPLICATE KEY UPDATE cdescripcion = VALUES(cdescripcion);
+
+INSERT INTO Provincia (id_provincia, id_departamento, cdescripcion) VALUES
+    ('1501', '15', 'LIMA'),
+    ('0701', '07', 'CALLAO'),
+    ('0401', '04', 'AREQUIPA')
+ON DUPLICATE KEY UPDATE cdescripcion = VALUES(cdescripcion);
+
+INSERT INTO Distrito (id_distrito, id_provincia, cdescripcion) VALUES
+    ('150101', '1501', 'LIMA CERCADO'),
+    ('150116', '1501', 'MIRAFLORES'),
+    ('070101', '0701', 'CALLAO')
+ON DUPLICATE KEY UPDATE cdescripcion = VALUES(cdescripcion);
+
+-- Empresa demo. Usuarios.ccod_empresa hace FK a esta tabla, asi que tiene
+-- que existir antes del INSERT en Usuarios.
+INSERT INTO Empresas
+    (ccod_empresa, cdsc_empresa, cnombre_bd, cnombre_servidor, id_estado,
+     cnum_tribu, csimbolo_moneda, cnombre_moneda, ctarifas, nusuario_extra,
+     ntienda_extra, cdepartamento, cprovincia, cdistrito, cpais_origen)
+VALUES ('EMP01', 'Empresa Demo', 'dbdemo', 'localhost', 1,
+        '20123456789', 'S/.', 'SOLES', 'T1', 0,
+        0, '15', '1501', '150101', 'PERU')
+ON DUPLICATE KEY UPDATE cdsc_empresa = VALUES(cdsc_empresa);
+
+-- Usuario admin / admin para poder iniciar sesion al instalar.
+INSERT INTO Usuarios
+    (ccod_usuario, cpassw, cdsc_usuario, id_rol, ccod_empresa,
+     cmail, ctelf, ccelular, cdirec, id_estado)
+VALUES ('admin', 'admin', 'Administrador del Sistema', 1, 'EMP01',
+        'admin@datpos.local', '01-2345678', '999999999', 'Av. Demo 123', 1)
+ON DUPLICATE KEY UPDATE cdsc_usuario = VALUES(cdsc_usuario);
