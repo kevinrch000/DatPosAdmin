@@ -1,21 +1,19 @@
 <?php
 /**
- * DatPOS - Conexion a base de datos (Multi-Tenant)
+ * DatPOS - Conexion a base de datos (Microsoft SQL Server, multi-tenant)
  * ----------------------------------------------------------------
- * Adaptacion del `database.php` original (sqlsrv / SQL Server) al
- * stack actual del proyecto: PHP 8 + PDO + MySQL/MariaDB.
- *
- * Reemplaza:  DA/DAConexionSQL.vb (VB.NET) y la version sqlsrv legacy.
+ * Reemplaza:  DA/DAConexionSQL.vb (VB.NET) y la version MySQL/PDO previa.
  *
  * Soporta dos modos:
  *   1. Conexion ADMIN  (DatPosAdmin)   -> selectStored / executeStored
  *   2. Conexion TENANT (BD por empresa)-> selectStoredTenant / executeStoredTenant
  *
- * Parametros: se aceptan como array asociativo NOMBRADO (igual que la
- * version SQL Server, p.ej. `array('@ccod_usuario' => 'ADMIN')`) o como
- * array POSICIONAL (p.ej. `array('ADMIN', '123')`). En MySQL los SPs son
- * posicionales por definicion: si se pasan nombrados, conservamos el orden
- * de iteracion del array (PHP preserva el orden de insercion).
+ * Implementacion:
+ *   - Driver: PDO + ODBC Driver 18 for SQL Server (`pdo_sqlsrv`).
+ *   - Llamadas: `EXEC <sp> ?, ?, ...` con parametros posicionales (compatible
+ *     con T-SQL). Se aceptan parametros nombrados (p.ej. `'@p' => 'x'`) o
+ *     posicionales (p.ej. `['x', 'y']`). El orden de iteracion del array
+ *     se preserva (PHP mantiene orden de insercion).
  *
  * Configuracion:
  *   - Conexion ADMIN  : se lee de  config/config.php  ('db' admin).
@@ -50,48 +48,66 @@ class Database
     }
 
     // ============================================================
-    // Construccion de la query (positional placeholders)
+    // Construccion de la query (placeholders posicionales SQL Server)
     // ============================================================
 
     /**
-     * Convierte un array de parametros (nombrados o posicionales) a
-     * placeholders posicionales `?, ?, ?` y la lista de valores en orden.
+     * Convierte un array de parametros (nombrados o posicionales) en una
+     * sentencia `EXEC <sp> ?, ?, ?` con la lista de valores en orden.
      *
      * @param array<int|string,mixed> $params
      * @return array{0:string,1:array<int,mixed>}
      */
     private static function buildCall(string $spName, array $params): array
     {
+        $sp = '[dbo].[' . str_replace([']', '['], '', $spName) . ']';
         if (empty($params)) {
-            return ["CALL `$spName`()", []];
+            return ["EXEC $sp", []];
         }
         $values = array_values($params);
-        $placeholders = implode(',', array_fill(0, count($values), '?'));
-        return ["CALL `$spName`($placeholders)", $values];
+        $placeholders = implode(', ', array_fill(0, count($values), '?'));
+        return ["EXEC $sp $placeholders", $values];
     }
 
     // ============================================================
-    // Pool de conexiones PDO (admin + tenants)
+    // Pool de conexiones PDO/sqlsrv
     // ============================================================
 
-    private static function connect(string $host, int $port, string $dbname, string $user, string $pass, string $charset = 'utf8mb4'): PDO
+    /**
+     * @param array<string,mixed> $extra opciones DSN extra (ej.
+     *        TrustServerCertificate, ConnectionPooling).
+     */
+    private static function connect(string $server, string $database, string $user, string $pass, array $extra = []): PDO
     {
-        $key = sprintf('%s|%d|%s|%s', $host, $port, $dbname, $user);
+        $key = sprintf('%s|%s|%s', $server, $database, $user);
         if (isset(self::$pool[$key])) {
             return self::$pool[$key];
         }
 
-        $dsn = sprintf('mysql:host=%s;port=%d;dbname=%s;charset=%s',
-            $host, $port, $dbname, $charset);
+        // Parametros DSN para pdo_sqlsrv. Server admite "host", "host,port",
+        // "tcp:host", o "host\\INSTANCE".
+        $dsnParts = [
+            "Server=$server",
+            "Database=$database",
+        ];
+        $defaults = [
+            'TrustServerCertificate' => '1',
+            'Encrypt'                => '0',
+            'APP'                    => 'DatPosAdmin',
+        ];
+        // array_merge (no '+'): permite que el usuario sobrescriba los defaults
+        // (p.ej. forzar Encrypt=1 o TrustServerCertificate=0 desde config).
+        foreach (array_merge($defaults, $extra) as $k => $v) {
+            $dsnParts[] = "$k=$v";
+        }
+        $dsn = 'sqlsrv:' . implode(';', $dsnParts);
 
         $pdo = new PDO($dsn, $user, $pass, [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => true,
+            PDO::ATTR_ERRMODE             => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
+            PDO::SQLSRV_ATTR_DIRECT_QUERY => true,
+            PDO::SQLSRV_ATTR_ENCODING     => PDO::SQLSRV_ENCODING_UTF8,
         ]);
-
-        // El dominio de id_estado incluye 0 (Bloqueado) y 1 (Habilitado).
-        $pdo->exec("SET sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO')");
 
         self::$pool[$key] = $pdo;
         return $pdo;
@@ -102,20 +118,18 @@ class Database
     {
         $cfg = self::config()['db'];
         return self::connect(
-            $cfg['host'],
-            (int)$cfg['port'],
-            $cfg['dbname'],
-            $cfg['user'],
-            $cfg['pass'],
-            $cfg['charset'] ?? 'utf8mb4'
+            (string)$cfg['server'],
+            (string)$cfg['dbname'],
+            (string)$cfg['user'],
+            (string)$cfg['pass'],
+            (array)($cfg['extra'] ?? [])
         );
     }
 
     /**
      * Conexion al TENANT, dinamica.
      * El objeto `objUsuario` puede ser BEUser o un array. Lee
-     * `cnombre_servidor` y `cnombre_bd` (o sus aliases `cnomser`/`cnombd`
-     * para compatibilidad con la version sqlsrv).
+     * `cnombre_servidor` y `cnombre_bd`.
      */
     public static function getTenantConnection(object|array|null $objUsuario): ?PDO
     {
@@ -136,20 +150,12 @@ class Database
             return null;
         }
 
-        // Permitir 'host:port'
-        $host = $server;
-        $port = (int)(self::config()['tenant']['port'] ?? 3306);
-        if (str_contains($server, ':')) {
-            [$host, $portStr] = explode(':', $server, 2);
-            $port = (int)$portStr;
-        }
-
         $tenantCfg = self::config()['tenant'] ?? [];
-        $user = (string)($tenantCfg['user'] ?? 'datpos_tenant');
+        $user = (string)($tenantCfg['user'] ?? '');
         $pass = (string)($tenantCfg['pass'] ?? '');
 
         try {
-            return self::connect($host, $port, $database, $user, $pass);
+            return self::connect($server, $database, $user, $pass, (array)($tenantCfg['extra'] ?? []));
         } catch (PDOException $e) {
             error_log("Database::getTenantConnection [$server/$database]: " . $e->getMessage());
             return null;
@@ -162,7 +168,6 @@ class Database
 
     /**
      * Ejecuta SP en BD Admin y retorna las filas como array asociativo.
-     * Equivalente a `DAConexionSQL.selectstored()`.
      *
      * @param array<int|string,mixed> $params
      * @return array<int,array<string,mixed>>
@@ -180,8 +185,14 @@ class Database
             $stmt = $pdo->prepare($sql);
             $stmt->execute($values);
             $rows = $stmt->fetchAll();
+            // SQL Server puede devolver resultsets vacios primero (rowcount).
             while ($stmt->nextRowset()) {
-                // ignorar resultsets adicionales
+                if (empty($rows)) {
+                    $extra = $stmt->fetchAll();
+                    if (!empty($extra)) {
+                        $rows = $extra;
+                    }
+                }
             }
             return $rows ?: [];
         } catch (PDOException $e) {
@@ -192,7 +203,6 @@ class Database
 
     /**
      * Ejecuta SP en BD Admin (sin SELECT). Retorna true/false.
-     * Equivalente a `DAConexionSQL.executestored()`.
      *
      * @param array<int|string,mixed> $params
      */
@@ -210,9 +220,9 @@ class Database
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($values);
-            while ($stmt->nextRowset()) {
-                // ignorar
-            }
+            do {
+                // drenar todos los resultsets
+            } while ($stmt->nextRowset());
             return true;
         } catch (PDOException $e) {
             throw new RuntimeException(
@@ -227,8 +237,7 @@ class Database
     // ============================================================
 
     /**
-     * Ejecuta SP en BD del Tenant y retorna filas. Equivalente a
-     * `DAConexionSQL.selectstored_OtraConexion()`.
+     * Ejecuta SP en BD del Tenant y retorna filas.
      *
      * @param array<int|string,mixed> $params
      * @return array<int,array<string,mixed>>
@@ -245,7 +254,12 @@ class Database
             $stmt->execute($values);
             $rows = $stmt->fetchAll();
             while ($stmt->nextRowset()) {
-                // ignorar
+                if (empty($rows)) {
+                    $extra = $stmt->fetchAll();
+                    if (!empty($extra)) {
+                        $rows = $extra;
+                    }
+                }
             }
             return $rows ?: [];
         } catch (PDOException $e) {
@@ -255,8 +269,7 @@ class Database
     }
 
     /**
-     * Ejecuta SP en BD del Tenant. Retorna true/false. Equivalente a
-     * `DAConexionSQL.executestored_OtraConexion()`.
+     * Ejecuta SP en BD del Tenant. Retorna true/false.
      *
      * @param array<int|string,mixed> $params
      */
@@ -270,9 +283,9 @@ class Database
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($values);
-            while ($stmt->nextRowset()) {
-                // ignorar
-            }
+            do {
+                // drenar
+            } while ($stmt->nextRowset());
             return true;
         } catch (PDOException $e) {
             error_log("Error executeStoredTenant [$spName]: " . $e->getMessage());
@@ -281,8 +294,7 @@ class Database
     }
 
     /**
-     * Ejecuta SP en BD del Tenant y retorna el primer scalar (id) del
-     * primer resultset. Equivalente a `executestored_OtraConexion_Id`.
+     * Ejecuta SP en BD del Tenant y retorna el primer scalar (id).
      *
      * @param array<int|string,mixed> $params
      */
@@ -298,7 +310,9 @@ class Database
             $stmt->execute($values);
             $col = $stmt->fetchColumn();
             while ($stmt->nextRowset()) {
-                // ignorar
+                if ($col === false) {
+                    $col = $stmt->fetchColumn();
+                }
             }
             return $col === false ? 0 : (int)$col;
         } catch (PDOException $e) {
@@ -308,12 +322,12 @@ class Database
     }
 
     /**
-     * Ejecuta SP del Tenant con parametros OUT (MySQL OUT/INOUT).
+     * Ejecuta SP del Tenant con parametros OUT (T-SQL OUTPUT params).
      *
-     * Acepta el mismo formato que la version sqlsrv:
+     * Acepta el mismo formato que la version sqlsrv legacy:
      *   $params = [
      *     '@p_in'  => ['value' => 'x'],
-     *     '@p_out' => ['direction' => 'output', 'type' => 'INT'],
+     *     '@p_out' => ['direction' => 'output', 'type' => 'NVARCHAR(200)'],
      *   ];
      *
      * Devuelve un array con `success` + valores OUT por nombre.
@@ -332,31 +346,45 @@ class Database
         $callArgs     = [];
         $values       = [];
         $outNames     = [];
+        $outTypes     = [];
 
         foreach ($params as $name => $def) {
-            $clean = ltrim((string)$name, '@');
+            $clean   = ltrim((string)$name, '@');
+            $atName  = '@' . $clean;
             if (isset($def['direction']) && $def['direction'] === 'output') {
-                $declarations[] = "SET @{$clean} = NULL;";
-                $callArgs[]     = "@{$clean}";
+                $sqlType        = $def['type'] ?? 'NVARCHAR(MAX)';
+                $declarations[] = "DECLARE $atName $sqlType;";
+                $callArgs[]     = "$atName OUTPUT";
                 $outNames[]     = $clean;
+                $outTypes[]     = $sqlType;
             } else {
                 $callArgs[] = '?';
                 $values[]   = $def['value'] ?? null;
             }
         }
 
-        $sql = implode(' ', $declarations) . " CALL `$spName`(" . implode(',', $callArgs) . ');';
+        $sp  = '[dbo].[' . str_replace([']', '['], '', $spName) . ']';
+        $sql = implode(' ', $declarations) . " EXEC $sp " . implode(', ', $callArgs) . ';';
+        if ($outNames) {
+            $sql .= ' SELECT ' . implode(', ',
+                array_map(fn($n) => "@$n AS [$n]", $outNames)) . ';';
+        }
 
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($values);
-            while ($stmt->nextRowset()) {
-                // ignorar
-            }
+
             $result = ['success' => true];
             if ($outNames) {
-                $select = 'SELECT ' . implode(',', array_map(fn($n) => "@$n AS `$n`", $outNames));
-                $row    = $pdo->query($select)->fetch();
+                $row = false;
+                do {
+                    $candidate = $stmt->fetch();
+                    if ($candidate !== false) {
+                        $row = $candidate;
+                        break;
+                    }
+                } while ($stmt->nextRowset());
+
                 if ($row) {
                     foreach ($row as $k => $v) {
                         if (isset($params['@' . $k])) {
@@ -366,6 +394,10 @@ class Database
                         }
                         $result[$k] = $v;
                     }
+                }
+            } else {
+                while ($stmt->nextRowset()) {
+                    // drenar
                 }
             }
             return $result;
