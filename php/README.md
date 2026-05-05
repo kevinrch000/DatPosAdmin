@@ -1,6 +1,8 @@
 # DatPosAdmin (PHP)
 
-Migración a PHP + MySQL/MariaDB del proyecto original ASP.NET WebForms (VB.NET).
+Migración a **PHP + Microsoft SQL Server** del proyecto original ASP.NET
+WebForms (VB.NET). Toda la capa de datos usa `pdo_sqlsrv` con el ODBC
+Driver 18 for SQL Server.
 
 ## Estructura
 
@@ -39,40 +41,61 @@ php/
 
 ## Requisitos
 
-- PHP 8.0+ con extensiones `pdo_mysql` y `mbstring`.
-- MySQL 5.7+ o MariaDB 10.x.
+- **Microsoft SQL Server** 2016 o superior (probado con SQL Server 2022).
+- **PHP 8.0+** con las extensiones:
+  - `pdo`
+  - `pdo_sqlsrv` y `sqlsrv` (Microsoft drivers para SQL Server)
+  - `mbstring`
+- **ODBC Driver 18 for SQL Server** (`msodbcsql18` en Linux).
+
+### Instalar el driver y las extensiones (Ubuntu 22.04)
+
+```bash
+# 1. Repo de Microsoft
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+  | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] \
+      https://packages.microsoft.com/ubuntu/22.04/prod jammy main" \
+  | sudo tee /etc/apt/sources.list.d/mssql-release.list
+sudo apt-get update
+
+# 2. ODBC driver + toolchain para compilar pecl
+sudo ACCEPT_EULA=Y apt-get install -y \
+    msodbcsql18 unixodbc-dev php-pear php-dev gcc g++ make
+
+# 3. Extensiones PHP. Para PHP 8.1 usar la 5.11.x (la 5.12+ pide PHP 8.3+).
+yes '' | sudo pecl install sqlsrv-5.11.1 pdo_sqlsrv-5.11.1
+echo -e "extension=sqlsrv.so\nextension=pdo_sqlsrv.so" \
+  | sudo tee /etc/php/8.1/cli/conf.d/30-sqlsrv.ini
+```
 
 ## Setup
 
 1. **Crear la base de datos** (`DatPosAdmin`) con tablas, FKs y SPs:
 
    ```bash
-   # Opcion A - MySQL / MariaDB (lo que usa la app por defecto):
-   mysql -u root -p < scriptsql/DatPosAdmin_mysql.sql
-
-   # Opcion B - Microsoft SQL Server (script T-SQL equivalente):
-   sqlcmd -S localhost -U sa -P <pass> -i scriptsql/DatPosAdmin_mssql.sql
+   sqlcmd -S localhost -U sa -P <pass> -C -i scriptsql/DatPosAdmin_mssql.sql
    ```
 
-   El script T-SQL (`DatPosAdmin_mssql.sql`) crea las mismas 10 tablas, 31
-   procedimientos y 12 FKs que la version MySQL, con sintaxis nativa de SQL
-   Server (IDENTITY, MERGE, CREATE OR ALTER, ISNULL, GETDATE, etc.). El
-   `Database.php` actual usa PDO/MySQL; usar el script de SQL Server requiere
-   adaptar la capa de conexion.
+   El script (`DatPosAdmin_mssql.sql`) es **idempotente** y crea 10 tablas,
+   31 procedimientos y 12 FOREIGN KEYS, mas datos semilla minimos
+   (ubigeo de Lima/Callao/Arequipa, empresa demo `EMP01` y usuario
+   `admin`/`admin`).
 
-2. **Crear un usuario MySQL para la app** (opcional, recomendado):
+2. **(Opcional) Crear un login dedicado para la app**:
 
    ```sql
-   CREATE USER 'datpos'@'localhost' IDENTIFIED BY 'tu_password';
-   GRANT ALL ON DatPosAdmin.* TO 'datpos'@'localhost';
-   FLUSH PRIVILEGES;
+   CREATE LOGIN datpos WITH PASSWORD = 'TuPasswordSegura1!';
+   USE DatPosAdmin;
+   CREATE USER datpos FOR LOGIN datpos;
+   ALTER ROLE db_owner ADD MEMBER datpos;
    ```
 
 3. **Configurar credenciales**:
 
    ```bash
    cp php/config/config.example.php php/config/config.php
-   # Editar config.php con tus credenciales y base_path.
+   # Editar config.php con server / dbname / user / pass.
    ```
 
 4. **Levantar el servidor** (desarrollo):
@@ -82,6 +105,7 @@ php/
    ```
 
    Abrir <http://localhost:8080>. El index redirige a `Account/Login.php`.
+   Login inicial: **`admin`** / **`admin`** (cambiar antes de produccion).
 
 ## Mapeo Web Methods (.aspx) -> endpoints PHP
 
@@ -100,8 +124,8 @@ Los `$.ajax` del frontend ahora apuntan a `Page.php?action=Method` y reciben
 
 ## Foreign Keys agregadas
 
-`scriptsql/DatPosAdmin_mysql.sql` agrega las siguientes referencias entre
-tablas (no presentes en `DatPosAdmin.sql` original):
+`scriptsql/DatPosAdmin_mssql.sql` agrega las siguientes referencias entre
+tablas (no presentes en el `DatPosAdmin.sql` original):
 
 - `Provincia.id_departamento`   → `Departamento.id_departamento`
 - `Distrito.id_provincia`       → `Provincia.id_provincia`

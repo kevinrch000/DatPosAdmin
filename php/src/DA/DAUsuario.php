@@ -28,13 +28,13 @@ class DAUsuario
         $sql = "SELECT
                     U.ccod_usuario,
                     U.cdsc_usuario,
-                    IFNULL(U.cdirec, '')   AS cdirec,
-                    IFNULL(R.cdsc_rol, '') AS cdsc_rol,
-                    IFNULL(U.ccelular, '') AS ccelular,
-                    IFNULL(U.cmail, '')    AS cmail,
-                    CAST(U.id_estado AS CHAR(10)) AS id_estado
-                FROM Usuarios U
-                LEFT JOIN Roles R ON R.id_rol = U.id_rol
+                    ISNULL(U.cdirec, '')   AS cdirec,
+                    ISNULL(R.cdsc_rol, '') AS cdsc_rol,
+                    ISNULL(U.ccelular, '') AS ccelular,
+                    ISNULL(U.cmail, '')    AS cmail,
+                    CAST(U.id_estado AS VARCHAR(10)) AS id_estado
+                FROM dbo.Usuarios U
+                LEFT JOIN dbo.Roles R ON R.id_rol = U.id_rol
                 WHERE U.ccod_empresa = ?";
         $stmt = Db::pdo()->prepare($sql);
         $stmt->execute([$ccod_empresa]);
@@ -167,9 +167,9 @@ class DAUsuario
     private function tenantFromEmpresa(string $ccod_empresa): ?object
     {
         $stmt = Db::pdo()->prepare(
-            'SELECT IFNULL(cnombre_servidor, "") AS cnombre_servidor,
-                    IFNULL(cnombre_bd, "")       AS cnombre_bd
-             FROM Empresas WHERE ccod_empresa = ?'
+            "SELECT ISNULL(cnombre_servidor, '') AS cnombre_servidor,
+                    ISNULL(cnombre_bd, '')       AS cnombre_bd
+             FROM dbo.Empresas WHERE ccod_empresa = ?"
         );
         $stmt->execute([$ccod_empresa]);
         $row = $stmt->fetch();
@@ -188,7 +188,7 @@ class DAUsuario
     public function ValidarBDEmpresa(string $ccod_empresa): array
     {
         $stmt = Db::pdo()->prepare(
-            "SELECT cnombre_bd FROM Empresas WHERE ccod_empresa = ? AND id_estado = 1"
+            "SELECT cnombre_bd FROM dbo.Empresas WHERE ccod_empresa = ? AND id_estado = 1"
         );
         $stmt->execute([$ccod_empresa]);
         $row = $stmt->fetch();
@@ -208,11 +208,11 @@ class DAUsuario
     public function ConsultarEmpresasConBDValida(): array
     {
         $sql = "SELECT id_empresa, ccod_empresa, cdsc_empresa,
-                       IFNULL(cnombre_servidor, '') AS cnombre_servidor,
-                       IFNULL(cnombre_bd, '')       AS cnombre_bd
-                FROM Empresas
+                       ISNULL(cnombre_servidor, '') AS cnombre_servidor,
+                       ISNULL(cnombre_bd, '')       AS cnombre_bd
+                FROM dbo.Empresas
                 WHERE id_estado = 1
-                  AND IFNULL(cnombre_bd, '') <> ''";
+                  AND ISNULL(cnombre_bd, '') <> ''";
         $stmt = Db::pdo()->query($sql);
         return $stmt->fetchAll() ?: [];
     }
@@ -220,7 +220,7 @@ class DAUsuario
     private function existeEmpresa(string $ccod_empresa): bool
     {
         $stmt = Db::pdo()->prepare(
-            "SELECT 1 FROM Empresas WHERE ccod_empresa = ? AND id_estado = 1"
+            "SELECT 1 FROM dbo.Empresas WHERE ccod_empresa = ? AND id_estado = 1"
         );
         $stmt->execute([$ccod_empresa]);
         return (bool)$stmt->fetchColumn();
