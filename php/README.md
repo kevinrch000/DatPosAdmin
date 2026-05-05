@@ -47,8 +47,18 @@ php/
 1. **Crear la base de datos** (`DatPosAdmin`) con tablas, FKs y SPs:
 
    ```bash
+   # Opcion A - MySQL / MariaDB (lo que usa la app por defecto):
    mysql -u root -p < scriptsql/DatPosAdmin_mysql.sql
+
+   # Opcion B - Microsoft SQL Server (script T-SQL equivalente):
+   sqlcmd -S localhost -U sa -P <pass> -i scriptsql/DatPosAdmin_mssql.sql
    ```
+
+   El script T-SQL (`DatPosAdmin_mssql.sql`) crea las mismas 10 tablas, 31
+   procedimientos y 12 FKs que la version MySQL, con sintaxis nativa de SQL
+   Server (IDENTITY, MERGE, CREATE OR ALTER, ISNULL, GETDATE, etc.). El
+   `Database.php` actual usa PDO/MySQL; usar el script de SQL Server requiere
+   adaptar la capa de conexion.
 
 2. **Crear un usuario MySQL para la app** (opcional, recomendado):
 
