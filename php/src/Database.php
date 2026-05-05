@@ -95,7 +95,9 @@ class Database
             'Encrypt'                => '0',
             'APP'                    => 'DatPosAdmin',
         ];
-        foreach ($defaults + $extra as $k => $v) {
+        // array_merge (no '+'): permite que el usuario sobrescriba los defaults
+        // (p.ej. forzar Encrypt=1 o TrustServerCertificate=0 desde config).
+        foreach (array_merge($defaults, $extra) as $k => $v) {
             $dsnParts[] = "$k=$v";
         }
         $dsn = 'sqlsrv:' . implode(';', $dsnParts);
