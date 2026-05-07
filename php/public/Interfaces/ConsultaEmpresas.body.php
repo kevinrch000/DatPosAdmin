@@ -69,6 +69,14 @@
                        <label class="floating-select2">Estado</label>
                    </div>
                </div>
+            <div class="col-sm-4" style="padding-top:18px;">
+                <button id="btn_buscar" class="btn botones_hab" onclick="Ejecutar();" title="Buscar" style="margin-right:8px;">
+                    <i class="material-icons" style="font-size:18px;vertical-align:middle;">search</i> Buscar
+                </button>
+                <button id="btn_limpiar" class="btn botones_hab" onclick="Limpiar();" title="Limpiar campos">
+                    <i class="material-icons" style="font-size:18px;vertical-align:middle;">cleaning_services</i> Limpiar campos
+                </button>
+            </div>
            </div> 
           
             <!-- . --> 
