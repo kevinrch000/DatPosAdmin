@@ -22,17 +22,20 @@ function ModalUsuariosdeEmpresa() {
             $('#table_visible_BuscarEmpresa').DataTable({
                 data: obj,
                 columns: [
-         { data: 'cbx',
-             render: function (data, type, row) {
-                 if (type === 'display') { return '<input type="radio" name="radiob">'; }
-                 return data;
-             },
-             className: "dt-body-center"
-         },
-                { data: 'ccod_empresa' },
-                { data: 'cdescripcion' },
-                 { data: 'countUsuarios' }
-            ]
+                    {
+                        data: null,
+                        defaultContent: '',
+                        orderable: false,
+                        render: function (data, type, row) {
+                            if (type === 'display') { return '<input type="radio" name="radiob">'; }
+                            return '';
+                        },
+                        className: "dt-body-center"
+                    },
+                    { data: 'ccod_empresa' },
+                    { data: 'cdescripcion' },
+                    { data: 'countUsuarios' }
+                ]
             });
             $('#table_secundariaBuscarEmpresa').DataTable({
                 "autoWidth": false,
