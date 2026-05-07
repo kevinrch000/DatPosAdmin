@@ -10,9 +10,8 @@
  *    `JWT_ACCESS_TTL`, `JWT_REFRESH_TTL`) o de
  *    `php/config/config.php['jwt']`.
  *
- * Esta clase **NO esta integrada todavia** con `Auth::login` ni con
- * los endpoints. La integracion (login emite cookie, require_login
- * verifica, refresh, logout) va en un PR aparte.
+ * Integrada con `Auth` (login/logout emiten/limpian cookies, `start()`
+ * rehidrata la sesion desde el access token si existe).
  */
 
 require_once __DIR__ . '/BE/BEUser.php';
@@ -64,23 +63,47 @@ class Jwt
     }
 
     /**
-     * Genera un access token (TTL corto) con los datos basicos del usuario.
+     * Genera un access token (TTL corto) con los datos del usuario necesarios
+     * para rehidratar la sesion sin tocar la BD.
      */
     public static function issueAccess(BEUser $u): string
     {
         $c = self::cfg();
         $now = time();
         return self::encode([
-            'iss' => $c['issuer'],
-            'aud' => $c['audience'],
-            'iat' => $now,
-            'exp' => $now + (int)$c['access_ttl'],
-            'typ' => 'access',
-            'sub' => $u->ccod_usuario,
-            'uid' => $u->id_usuario,
-            'rol' => $u->id_rol,
-            'emp' => $u->ccod_empresa,
+            'iss'  => $c['issuer'],
+            'aud'  => $c['audience'],
+            'iat'  => $now,
+            'exp'  => $now + (int)$c['access_ttl'],
+            'typ'  => 'access',
+            'sub'  => $u->ccod_usuario,
+            'uid'  => $u->id_usuario,
+            'rol'  => $u->id_rol,
+            'emp'  => $u->ccod_empresa,
+            'dsc'  => $u->cdsc_usuario,
+            'edsc' => $u->cdsc_empresa,
+            'bd'   => $u->cnombre_bd,
+            'srv'  => $u->cnombre_servidor,
         ], $c['secret']);
+    }
+
+    /**
+     * Reconstruye un BEUser a partir de los claims de un access token.
+     *
+     * @param array<string,mixed> $claims
+     */
+    public static function userFromClaims(array $claims): BEUser
+    {
+        $u = new BEUser();
+        $u->id_usuario       = (int)($claims['uid']  ?? 0);
+        $u->ccod_usuario     = (string)($claims['sub']  ?? '');
+        $u->cdsc_usuario     = (string)($claims['dsc']  ?? '');
+        $u->id_rol           = (string)($claims['rol']  ?? '');
+        $u->ccod_empresa     = (string)($claims['emp']  ?? '');
+        $u->cdsc_empresa     = (string)($claims['edsc'] ?? '');
+        $u->cnombre_bd       = (string)($claims['bd']   ?? '');
+        $u->cnombre_servidor = (string)($claims['srv']  ?? '');
+        return $u;
     }
 
     /**
