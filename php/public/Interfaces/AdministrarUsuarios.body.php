@@ -1,4 +1,4 @@
-﻿ 
+ 
  
 
    
@@ -25,6 +25,28 @@
       <input id="hdd_ultimafila2" type="hidden"/> 
     <div class="c-content-center">
         
+        <!-- Barra de botones -->
+        <div style="margin-bottom:15px; padding:8px 0; border-bottom:1px solid #ddd;">
+            <button id="btn_p_nuevo" class="btn botones_hab" onclick="Nuevo();" title="Nuevo">
+                <i class="material-icons" style="font-size:18px;vertical-align:middle;">add</i> Nuevo
+            </button>
+            <button id="btn_p_editar" class="btn botones_des" onclick="Editar();" title="Editar">
+                <i class="material-icons" style="font-size:18px;vertical-align:middle;">edit</i> Editar
+            </button>
+            <button id="btn_p_grabar" class="btn botones_des" onclick="Guardar();" title="Guardar">
+                <i class="material-icons" style="font-size:18px;vertical-align:middle;">save</i> Guardar
+            </button>
+            <button id="btn_p_eliminar" class="btn botones_des" onclick="Eliminar();" title="Eliminar">
+                <i class="material-icons" style="font-size:18px;vertical-align:middle;">delete</i> Eliminar
+            </button>
+            <button id="btn_p_limpiar" class="btn botones_hab" onclick="Limpiar();" title="Limpiar campos" style="margin-left:10px;">
+                <i class="material-icons" style="font-size:18px;vertical-align:middle;">cleaning_services</i> Limpiar
+            </button>
+            <button id="btn_p_back" class="btn botones_des" onclick="Deshacer();" title="Deshacer">
+                <i class="material-icons" style="font-size:18px;vertical-align:middle;">undo</i> Deshacer
+            </button>
+        </div>
+
         <div class="tab-content">
          <ul class="nav nav-tabs" style="">
              <li onclick="tab_datosclick();" class="active">
@@ -77,7 +99,7 @@
 	                            <option value="1">Activo</option>
 	                            <option value="0">Inactivo</option>
                             </select>
-                            <label id="blEstado" class="floating-select2">Estado</label>
+                            <label id="blEstado" class="floating-disable">Estado</label>
                           </div>
                     </div>
                 </div>
@@ -95,7 +117,7 @@
                         <option value="1">Administrador Master</option>
 	                    <option value="2">Administrador Empresa</option>
                         </select> 
-                        <label id="blRol" class="floating-select2">Rol</label>
+                        <label id="blRol" class="floating-disable">Rol</label>
                          </div>
                     </div>
                 </div>

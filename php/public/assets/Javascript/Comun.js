@@ -1,4 +1,4 @@
-﻿
+
 
 //Captura click derecho para generar Menu context  
 (function ($, window) { 
@@ -217,6 +217,17 @@ function traducir_tabla() {
                     1: 'una fila seleccionada'
                 }
             }
+        }
+    });
+}
+
+function Limpiar() {
+    // Limpiar todos los campos con clase .limpiar
+    $(".limpiar").each(function () {
+        if ($(this).is("select")) {
+            this.selectedIndex = 0;
+        } else {
+            $(this).val("");
         }
     });
 }

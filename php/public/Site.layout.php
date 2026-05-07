@@ -53,6 +53,7 @@ function site_layout_header(string $titulo = 'Administración', string $extraHea
     <script src="<?= $base ?>/assets/Javascript/ddl_autocomplete.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link href="<?= $base ?>/assets/Styles/Moderno.css" rel="stylesheet" type="text/css" />
 
     <script src="<?= $base ?>/assets/Javascript/FileSaver.js"></script>
@@ -63,6 +64,17 @@ function site_layout_header(string $titulo = 'Administración', string $extraHea
         .navbar { min-height: 0px; }
         .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
             background-color: #f5f5f5; opacity: 1;
+        }
+        /* Toolbar buttons: state via CSS classes, no HTML disabled needed */
+        .botones_des {
+            pointer-events: none;
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+        .botones_hab {
+            pointer-events: auto;
+            opacity: 1;
+            cursor: pointer;
         }
     </style>
 </head>
