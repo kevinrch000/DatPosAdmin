@@ -1,4 +1,4 @@
-﻿var fecha = new Date();
+var fecha = new Date();
 var hoy = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear() + "-" + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds() + ":" + fecha.getMilliseconds();
 
 function mostrarContrasena() {
@@ -29,7 +29,7 @@ function UsuariosAsociados() {
         $.ajax({
             type: "POST",
             url: 'AdministrarUsuarios.php?action=UsuariosAsociados',
-            data: '{ccod_empresa: "' + $('#hdd_ultimafila2').val() + '" }',
+            data: JSON.stringify({ ccod_empresa: $('#hdd_ultimafila2').val() }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
@@ -185,7 +185,7 @@ function ModalEmpresa() {
         "pageLength": 5,
         columns: [
             {
-                data: 'cbx',
+                data: null,
                 render: function (data, type, row) {
                     if (type === 'display') { return '<input type="radio" name="radiob">'; }
                     return data;
@@ -289,7 +289,7 @@ function CompletarCamposUsuario(obj) {
     $("#tb_celular").val(obj[0].ccelular);
     $("#tb_telf").val(obj[0].ctelf);
     (document.getElementById("dl_estado")).selectedIndex =
-        [...(document.getElementById("dl_estado")).options].findIndex(option => option.value === (obj[0].id_estado).toString());
+        [...(document.getElementById("dl_estado")).options].findIndex(option => option.value === (obj[0].cstatus).toString());
     (document.getElementById("dl_rol")).selectedIndex =
         [...(document.getElementById("dl_rol")).options].findIndex(option => option.value === (obj[0].id_rol).toString());
 
@@ -390,7 +390,7 @@ function tab_datosclick() {
             $.ajax({
                 type: "POST",
                 url: 'AdministrarUsuarios.php?action=ConsultarUsuario',
-                data: '{codigo: "' + $('#hdd_ultimafila').val() + '" }',
+                data: JSON.stringify({ codigo: $('#hdd_ultimafila').val() }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -422,7 +422,7 @@ function table_two_click(tbody) {
         $.ajax({
             type: "POST",
             url: 'AdministrarUsuarios.php?action=ConsultarUsuario',
-            data: '{codigo: "' + fila[0].innerText + '" }',
+            data: JSON.stringify({ codigo: fila[0].innerText.trim() }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
@@ -599,7 +599,7 @@ function Eliminar() {
             $.ajax({
                 type: "POST",
                 url: 'AdministrarUsuarios.php?action=Eliminar',
-                data: '{usuario: "' + $('#tb_ccod_usuario').val() + '",ipServidor: "' + $('#ipServidor').val() + '",nomServidor: "' + $('#nomServidor').val() + '" }',
+                data: JSON.stringify({ usuario: $('#tb_ccod_usuario').val(), ipServidor: $('#ipServidor').val(), nomServidor: $('#nomServidor').val() }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,

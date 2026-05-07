@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     'cmail'        => (string)($r['cmail'] ?? ''),
                     'cstatus'      => (string)($r['id_estado'] ?? ''),
                 ], $rows));
+                break;
             case 'TablaEmpresas':
                 $rows = $blEmpresa->CargarCompaniasConBDValida();
                 Json::respond(array_map(fn($r) => [
@@ -38,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     'cnombre_servidor' => (string)$r['cnombre_servidor'],
                     'cnombre_bd'       => (string)$r['cnombre_bd'],
                 ], $rows));
+                break;
             case 'ConsultarUsuarios':
                 $rows = $blUsuario->ConsultarUs();
                 Json::respond(array_map(fn($r) => [
@@ -51,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     'cstatus'      => (string)($r['id_estado'] ?? ''),
                     'dfch_crea'    => (string)($r['dfch_crea'] ?? ''),
                 ], $rows));
+                break;
             case 'ConsultarUsuario':
                 $rows = $blUsuario->CargarUsuario((string)($body['codigo'] ?? ''));
                 $out = [];
@@ -72,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     ];
                 }
                 Json::respond($out);
+                break;
             case 'GrabarUsuario':
                 $usuarios  = $body['usuario'] ?? [];
                 $operacion = (string)($body['operacion'] ?? '');
@@ -85,14 +89,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                 }
                 $resp = null;
                 if ($operacion === 'nuevo') {
-                    if ($blUsuario->InsertarUsuarioAdmin($obj)) {
-                        $resp = $blUsuario->InsertarUsuario($obj, Auth::user());
+                    try {
+                        $adminOk = $blUsuario->InsertarUsuarioAdmin($obj);
+                    } catch (Throwable $ex) {
+                        // Capturar violación de UNIQUE constraint (usuario duplicado)
+                        $msg = $ex->getMessage();
+                        if (stripos($msg, 'UNIQUE') !== false || stripos($msg, 'duplicate') !== false || stripos($msg, 'Violation') !== false) {
+                            Json::respond([false, 'ERROR', 'El código de usuario "' . $obj->ccod_usuario . '" ya existe.']);
+                        }
+                        Json::respond([false, 'ERROR', 'Error al insertar usuario: ' . $msg]);
+                    }
+                    if ($adminOk) {
+                        // Intentar insertar en BD hija (tenant) - si falla, es solo un warning
+                        $tenantResp = $blUsuario->InsertarUsuario($obj, Auth::user());
+                        if ($tenantResp && $tenantResp[0] === false) {
+                            error_log('Warning: usuario creado en Admin pero fallo en BD hija: ' . ($tenantResp[2] ?? ''));
+                        }
+                        $resp = [true, 'OK', ''];
                     } else {
                         $resp = [false, 'ERROR', 'No se pudo insertar el usuario en DatPosAdmin'];
                     }
                 } elseif ($operacion === 'editar') {
-                    if ($blUsuario->EditarUsuarioAdmin($obj)) {
-                        $resp = $blUsuario->EditarUsuario($obj, Auth::user());
+                    try {
+                        $adminOk = $blUsuario->EditarUsuarioAdmin($obj);
+                    } catch (Throwable $ex) {
+                        Json::respond([false, 'ERROR', 'Error al editar usuario: ' . $ex->getMessage()]);
+                    }
+                    if ($adminOk) {
+                        // Intentar editar en BD hija (tenant) - si falla, es solo un warning
+                        $tenantResp = $blUsuario->EditarUsuario($obj, Auth::user());
+                        if ($tenantResp && $tenantResp[0] === false) {
+                            error_log('Warning: usuario editado en Admin pero fallo en BD hija: ' . ($tenantResp[2] ?? ''));
+                        }
+                        $resp = [true, 'OK', ''];
                     } else {
                         $resp = [false, 'ERROR', 'No se pudo editar el usuario en DatPosAdmin'];
                     }
@@ -100,6 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     $resp = [false, 'ERROR', 'Operacion invalida: ' . $operacion];
                 }
                 Json::respond($resp);
+                break;
             case 'Eliminar':
                 $usuario     = (string)($body['usuario'] ?? '');
                 $ipServidor  = (string)($body['ipServidor'] ?? '');
@@ -109,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     $ok = $blUsuario->EliminarUsuario($usuario, $ipServidor, $nomServidor, Auth::user());
                 }
                 Json::respond($ok);
+                break;
             default:
                 Json::error('Accion desconocida: ' . $_GET['action'], 400);
         }

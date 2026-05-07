@@ -1,4 +1,4 @@
-﻿ var fecha = new Date();
+ var fecha = new Date();
 var hoy = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear() + "-" + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds() + ":" + fecha.getMilliseconds();
 
 
@@ -98,21 +98,21 @@ function CompletarCampos(obj) {
 
     if (document.getElementById("txtDepartamento") && obj[0].cdepartamento != null) {
         (document.getElementById("txtDepartamento")).selectedIndex =
-            [...(document.getElementById("txtDepartamento")).options].findIndex(option => option.text === obj[0].cdepartamento.toString());
+            [...(document.getElementById("txtDepartamento")).options].findIndex(option => option.value === (obj[0].cdepartamento || '').toString());
     }
 
     CargarProvincia();
 
     if (document.getElementById("txtProvincia") && obj[0].cprovincia != null) {
         (document.getElementById("txtProvincia")).selectedIndex =
-            [...(document.getElementById("txtProvincia")).options].findIndex(option => option.text === obj[0].cprovincia.toString());
+            [...(document.getElementById("txtProvincia")).options].findIndex(option => option.value === (obj[0].cprovincia || '').toString());
     }
 
     CargarDistrito();
 
     if (document.getElementById("txtDistrito") && obj[0].cdistrito != null) {
         (document.getElementById("txtDistrito")).selectedIndex =
-            [...(document.getElementById("txtDistrito")).options].findIndex(option => option.text === obj[0].cdistrito.toString());
+            [...(document.getElementById("txtDistrito")).options].findIndex(option => option.value === (obj[0].cdistrito || '').toString());
     }
 
     if (document.getElementById("TipFact") && obj[0].ctip_facturador != null) {
@@ -208,7 +208,7 @@ function CargarDepartamento(){
     $.ajax({
         type: "POST",
         url: 'AdministrarCompanias.php?action=CargarDepartamento',
-        data: '{ccod_cia: "' + "" + '" }',
+        data: JSON.stringify({ ccod_cia: '' }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -239,7 +239,7 @@ function CargarProvincia(){
     $.ajax({
         type: "POST",
         url: 'AdministrarCompanias.php?action=CargarProvincia',
-        data: '{id_departamento: "' + $('#txtDepartamento').val() + '" }',
+        data: JSON.stringify({ id_departamento: $('#txtDepartamento').val() }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -271,7 +271,7 @@ function CargarDistrito(){
     $.ajax({
         type: "POST",
         url: 'AdministrarCompanias.php?action=CargarDistrito',
-        data: '{id_provincia: "' + $('#txtProvincia').val() + '" }',
+        data: JSON.stringify({ id_provincia: $('#txtProvincia').val() }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -338,7 +338,7 @@ function tab_datosclick() {
             $.ajax({
                 type: "POST",
                 url: 'AdministrarCompanias.php?action=ConsultarEmpresa',
-                data: '{codigo: "' + $('#hdd_ultimafila').val() + '" }',
+                data: JSON.stringify({ codigo: $('#hdd_ultimafila').val() }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -373,7 +373,7 @@ function table_two_click(tbody) {
         $.ajax({
             type: "POST",
             url: 'AdministrarCompanias.php?action=ConsultarEmpresa',
-            data: '{codigo: "' + codEmpresa + '" }',
+            data: JSON.stringify({ codigo: codEmpresa }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
@@ -426,15 +426,15 @@ function Guardar() {
 
     var cdpto = "";
     if (document.getElementById("txtDepartamento")) {
-        cdpto = $("#txtDepartamento option:selected").text() || "";
+        cdpto = $("#txtDepartamento").val() || "";
     }
     var cprov = "";
     if (document.getElementById("txtProvincia")) {
-        cprov = $("#txtProvincia option:selected").text() || "";
+        cprov = $("#txtProvincia").val() || "";
     }
     var cdist = "";
     if (document.getElementById("txtDistrito")) {
-        cdist = $("#txtDistrito option:selected").text() || "";
+        cdist = $("#txtDistrito").val() || "";
     }
 
     var cubigeo = $('#txtUbigeo').val() || "";
@@ -526,7 +526,7 @@ function Eliminar(){
         $.ajax({
             type: "POST",
             url: 'AdministrarCompanias.php?action=EliminarE',
-            data: '{elimrempresa: "' + $('#txtcodigo').val() + '" }',
+            data: JSON.stringify({ elimrempresa: $('#txtcodigo').val() }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
@@ -536,7 +536,7 @@ function Eliminar(){
                         Mensaje('Correcto','','success');
                         $('#table_id').DataTable().destroy();
                         CargarTabla();
-                        $('.nav-tabs li:eq(3) a').tab('show');
+                        $('.nav-tabs li:eq(1) a').tab('show');
                         Desabilitar();
                         Deshacer();
                         inicar_menu_nivel3('Administrar Compañia','1_li_administracion', '2_li_empresas', '1');
@@ -577,10 +577,15 @@ $(function () {
 });
 
 
-//function Limpiar(){
-//    $("#txtcodigo").val("");
-//    $("#tb_descripcion").val("");
-//    $("#ddl_familia").val("");
-//    $("#ddl_um").val("");
-//    $("#ddl_estado").val("");
-//}
+// Limpiar campos sobreescribe la version generica de Comun.js
+// para tambien resetear los selects de ubigeo.
+function LimpiarEmpresa() {
+    Limpiar(); // llama la generica
+    // Resetear selects de ubigeo
+    var selects = ['txtDepartamento', 'txtProvincia', 'txtDistrito', 'txtNombreMoneda', 'txt_nenviosunat', 'dl_tarifas', 'TipFact'];
+    selects.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.selectedIndex = 0;
+    });
+    $('#txtUbigeo').val('');
+}

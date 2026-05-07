@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/../../src/Auth.php';
 require_once __DIR__ . '/../../src/Json.php';
+require_once __DIR__ . '/../../src/Database.php';
 require_once __DIR__ . '/../../src/BL/BLEmpresa.php';
 require_once __DIR__ . '/../../src/BE/BEEmpresa.php';
 
@@ -23,20 +24,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     fn($r) => ['id' => (string)$r['id_departamento'], 'name' => (string)$r['cdescripcion']],
                     $rows
                 ));
+                break;
             case 'CargarProvincia':
                 $rows = $bl->CargarProvincia((string)($body['id_departamento'] ?? ''));
                 Json::respond(array_map(
                     fn($r) => ['id' => (string)$r['id_provincia'], 'name' => (string)$r['cdescripcion']],
                     $rows
                 ));
+                break;
             case 'CargarDistrito':
                 $rows = $bl->CargarDistrito((string)($body['id_provincia'] ?? ''));
                 Json::respond(array_map(
                     fn($r) => ['id' => (string)$r['id_distrito'], 'name' => (string)$r['cdescripcion']],
                     $rows
                 ));
+                break;
             case 'ConsultarEmpresas':
-                Json::respond($bl->CargarCompanias());
+                $rows = $bl->CargarCompanias();
+                $out = [];
+                foreach ($rows as $r) {
+                    $out[] = [
+                        'id_empresa'        => (int)($r['id_empresa'] ?? 0),
+                        'ccod_empresa'      => (string)($r['ccod_empresa'] ?? ''),
+                        'cdescripcion'      => (string)($r['cdsc_empresa'] ?? ''),
+                        'cnum_tribu'        => (string)($r['cnum_tribu'] ?? ''),
+                        'cnombre_servidor'  => (string)($r['cnombre_servidor'] ?? ''),
+                        'cnombre_bd'        => (string)($r['cnombre_bd'] ?? ''),
+                        'cnombre_moneda'    => (string)($r['cnombre_moneda'] ?? ''),
+                        'ctarifas'          => (string)($r['ctarifas'] ?? ''),
+                        'dfch_crea'         => (string)($r['dfch_crea'] ?? ''),
+                    ];
+                }
+                Json::respond($out);
+                break;
             case 'ConsultarEmpresa':
                 $codigo = (string)($body['codigo'] ?? '');
                 $rows = $bl->CargarCompania($codigo);
@@ -70,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     ];
                 }
                 Json::respond($out);
+                break;
             case 'GrabarEmpresa':
                 $empresa   = $body['empresa'] ?? [];
                 $operacion = (string)($body['operacion'] ?? '');
@@ -79,14 +100,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                 $obj = BEEmpresa::fromArray($empresa[0]);
                 $ok  = false;
                 if ($operacion === 'nuevo') {
-                    $ok = $bl->InsertarCompania($obj);
+                    try {
+                        $ok = $bl->InsertarCompania($obj);
+                    } catch (Throwable $ex) {
+                        $msg = $ex->getMessage();
+                        if (stripos($msg, 'UNIQUE') !== false || stripos($msg, 'duplicate') !== false || stripos($msg, 'PRIMARY') !== false || stripos($msg, 'Violation') !== false) {
+                            Json::error('El código de empresa "' . $obj->ccod_empresa . '" ya existe.', 409);
+                        }
+                        Json::error('Error al insertar empresa: ' . $msg);
+                    }
                 } elseif ($operacion === 'editar') {
-                    $ok = $bl->EditarCompania($obj);
+                    try {
+                        $ok = $bl->EditarCompania($obj);
+                    } catch (Throwable $ex) {
+                        Json::error('Error al editar empresa: ' . $ex->getMessage());
+                    }
                 }
                 Json::respond($ok);
+                break;
             case 'EliminarE':
                 $cod = (string)($body['elimrempresa'] ?? '');
-                Json::respond($bl->EliminarEmpresa($cod));
+                if ($cod === '') {
+                    Json::respond(false);
+                }
+                // Soft delete: desactivar empresa en vez de borrar permanentemente
+                try {
+                    $pdo = Database::getAdminConnection();
+                    $stmt = $pdo->prepare("UPDATE dbo.Empresas SET id_estado = 0 WHERE ccod_empresa = ?");
+                    $stmt->execute([$cod]);
+                    Json::respond(true);
+                } catch (Throwable $ex) {
+                    Json::error('Error al desactivar empresa: ' . $ex->getMessage());
+                }
+                break;
             default:
                 Json::error('Accion desconocida: ' . $_GET['action'], 400);
         }
