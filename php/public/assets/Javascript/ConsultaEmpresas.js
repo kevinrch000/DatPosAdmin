@@ -86,7 +86,7 @@ function ModalUsuariosdeEmpresa() {
     $.ajax({
         type: "POST",
         url: 'ConsultaEmpresas.php?action=ConsultaUsuariosPorEmpresa',
-        data: '{empresa: "' + "" + '"}',
+        data: JSON.stringify({ empresa: "" }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -158,7 +158,12 @@ function Ejecutar() {
     $.ajax({
         type: "POST",
         url: 'ConsultaEmpresas.php?action=ConsultasEmpresasPrincipal',
-        data: '{ccod_empresa: "' + txtCodEmp.value + '", ctarifas: "' + txtTarifa.value + '", cpais_origen: "' + txtPais.value + '", cstatus: "' + txtStatus.value + '" }',
+        data: JSON.stringify({
+            ccod_empresa: txtCodEmp.value,
+            ctarifas: txtTarifa.value,
+            cpais_origen: txtPais.value,
+            cstatus: txtStatus.value
+        }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,

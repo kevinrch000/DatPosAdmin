@@ -13,7 +13,7 @@ function ModalUsuariosdeEmpresa() {
    $.ajax({
         type: "POST",
         url: 'ConsultaUsuarios.php?action=ConsultaUsuariosPorEmpresa',
-        data: '{empresa: "' + "" + '"}',
+        data: JSON.stringify({ empresa: "" }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -83,7 +83,7 @@ function Ejecutar() {
     $.ajax({
         type: "POST",
         url: 'ConsultaUsuarios.php?action=ConsultasUsuariosPrincipal',
-        data: '{codigo: "' + tb_codEmpresa.value + '",estado: "' + txtStatus.value + '"  }',
+        data: JSON.stringify({ codigo: tb_codEmpresa.value, estado: txtStatus.value }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
