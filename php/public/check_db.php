@@ -130,7 +130,9 @@ try {
 echo '<h2>4. Test de login (admin / admin)</h2>';
 
 try {
-    $testRows = Database::selectStored('webDatpos_validarUsuario', ['admin', 'admin']);
+    require_once __DIR__ . '/../src/BL/BLUser.php';
+    $bl = new BLUser();
+    $testRows = $bl->ValidarUsuario('admin', 'admin');
     if ($testRows && count($testRows) > 0) {
         echo '<p class="ok">✔ Login "admin"/"admin" retorno ' . count($testRows) . ' fila(s)</p>';
         echo '<pre>' . htmlspecialchars(print_r($testRows[0], true)) . '</pre>';
@@ -149,7 +151,9 @@ echo '<h2>5. Inspeccion de tabla Usuarios (usuario "admin")</h2>';
 try {
     // 5a. Buscar el usuario sin filtrar contraseña ni estado
     $user = $pdo->query("
-        SELECT id_usuario, ccod_usuario, cpassw, id_estado, id_rol, ccod_empresa
+        SELECT id_usuario, ccod_usuario, cpassw,
+               ISNULL(cpassw_bcrypt, '') AS cpassw_bcrypt,
+               id_estado, id_rol, ccod_empresa
         FROM Usuarios
         WHERE ccod_usuario = 'admin'
     ")->fetch();
@@ -157,19 +161,24 @@ try {
     if ($user) {
         echo '<p class="ok">✔ Usuario "admin" encontrado en tabla Usuarios</p>';
         echo '<pre>';
-        echo "id_usuario   : " . $user['id_usuario'] . "\n";
-        echo "ccod_usuario : " . $user['ccod_usuario'] . "\n";
-        echo "cpassw       : " . $user['cpassw'] . "\n";
-        echo "id_estado    : " . $user['id_estado'] . ($user['id_estado'] == 1 ? ' (activo)' : ' ⚠ INACTIVO') . "\n";
-        echo "id_rol       : " . $user['id_rol'] . "\n";
-        echo "ccod_empresa : " . $user['ccod_empresa'] . "\n";
+        echo "id_usuario    : " . $user['id_usuario'] . "\n";
+        echo "ccod_usuario  : " . $user['ccod_usuario'] . "\n";
+        echo "cpassw        : " . ($user['cpassw'] ?: '(vacio)') . "\n";
+        echo "cpassw_bcrypt : " . ($user['cpassw_bcrypt'] !== '' ? '(hash bcrypt presente)' : '(vacio)') . "\n";
+        echo "id_estado     : " . $user['id_estado'] . ($user['id_estado'] == 1 ? ' (activo)' : ' ⚠ INACTIVO') . "\n";
+        echo "id_rol        : " . $user['id_rol'] . "\n";
+        echo "ccod_empresa  : " . $user['ccod_empresa'] . "\n";
         echo '</pre>';
 
-        // 5b. Verificar contraseña
-        if ($user['cpassw'] === 'admin') {
-            echo '<p class="ok">✔ Contraseña coincide con "admin"</p>';
+        // 5b. Verificar contraseña: bcrypt primero, fallback a plaintext legacy
+        $bcrypt = (string)$user['cpassw_bcrypt'];
+        $legacy = (string)$user['cpassw'];
+        if ($bcrypt !== '' && password_verify('admin', $bcrypt)) {
+            echo '<p class="ok">✔ Contraseña "admin" valida via bcrypt</p>';
+        } elseif ($legacy !== '' && hash_equals($legacy, 'admin')) {
+            echo '<p class="warn">⚠ Contraseña "admin" valida via plaintext legacy (se hasheara al primer login)</p>';
         } else {
-            echo '<p class="err">✖ Contraseña NO coincide: almacenada = "' . htmlspecialchars($user['cpassw']) . '" vs esperada = "admin"</p>';
+            echo '<p class="err">✖ Contraseña NO coincide con "admin" (ni bcrypt ni legacy)</p>';
         }
 
         // 5c. Verificar estado

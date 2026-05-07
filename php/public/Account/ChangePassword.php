@@ -7,6 +7,7 @@
 require_once __DIR__ . '/../../src/Auth.php';
 require_once __DIR__ . '/../../src/Json.php';
 require_once __DIR__ . '/../../src/Db.php';
+require_once __DIR__ . '/../../src/DA/DAUser.php';
 
 Auth::require_login();
 $base = Auth::base_path();
@@ -20,10 +21,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_GET['action'] ?? ($body['action'] ?? 'cambiar');
     if ($action === 'cambiar') {
         try {
+            $cpassw   = (string)($body['cpassw']   ?? '');
+            $newpassw = (string)($body['newpassw'] ?? '');
+            if ($cpassw === '' || $newpassw === '') {
+                Json::respond(0);
+            }
+
+            $da   = new DAUser();
+            $rows = $da->BuscarPorCodigo($user->ccod_usuario);
+            if (!$rows) {
+                Json::respond(0);
+            }
+            $bcrypt = (string)($rows[0]['cpassw_bcrypt'] ?? '');
+            $legacy = (string)($rows[0]['cpassw']        ?? '');
+
+            $ok = ($bcrypt !== '' && password_verify($cpassw, $bcrypt))
+               || ($legacy !== '' && hash_equals($legacy, $cpassw));
+            if (!$ok) {
+                Json::respond(0);
+            }
+
             $rows = Db::callSp('webDatpos_cambiarContrasena', [
                 $user->ccod_usuario,
-                (string)($body['cpassw']   ?? ''),
-                (string)($body['newpassw'] ?? ''),
+                password_hash($newpassw, PASSWORD_DEFAULT),
             ]);
             $resultado = $rows[0]['resultado'] ?? 0;
             Json::respond((int)$resultado);
