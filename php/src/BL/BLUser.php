@@ -36,19 +36,26 @@ class BLUser
 
         $authed = false;
 
-        if ($bcrypt !== '' && password_verify($clave, $bcrypt)) {
-            $authed = true;
-            if (password_needs_rehash($bcrypt, PASSWORD_DEFAULT)) {
-                try {
-                    $this->da->ActualizarPasswordHash(
-                        $usuario,
-                        password_hash($clave, PASSWORD_DEFAULT)
-                    );
-                } catch (Throwable $e) {
-                    error_log("[BLUser] Rehash fallo para '$usuario': " . $e->getMessage());
+        if ($bcrypt !== '') {
+            // Si ya hay hash bcrypt, SOLO bcrypt autentica. El fallback al
+            // plaintext queda deshabilitado para evitar backdoor con la
+            // password vieja despues de un cambio.
+            if (password_verify($clave, $bcrypt)) {
+                $authed = true;
+                if (password_needs_rehash($bcrypt, PASSWORD_DEFAULT)) {
+                    try {
+                        $this->da->ActualizarPasswordHash(
+                            $usuario,
+                            password_hash($clave, PASSWORD_DEFAULT)
+                        );
+                    } catch (Throwable $e) {
+                        error_log("[BLUser] Rehash fallo para '$usuario': " . $e->getMessage());
+                    }
                 }
             }
         } elseif ($legacy !== '' && hash_equals($legacy, $clave)) {
+            // Solo se llega aca cuando el usuario nunca migro: cpassw_bcrypt
+            // vacio. Hasheamos perezosamente y limpiamos legacy.
             try {
                 $this->da->ActualizarPasswordHash(
                     $usuario,

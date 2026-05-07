@@ -35,8 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $bcrypt = (string)($rows[0]['cpassw_bcrypt'] ?? '');
             $legacy = (string)($rows[0]['cpassw']        ?? '');
 
-            $ok = ($bcrypt !== '' && password_verify($cpassw, $bcrypt))
-               || ($legacy !== '' && hash_equals($legacy, $cpassw));
+            // Si ya hay hash bcrypt, SOLO bcrypt autentica. Si esta vacio,
+            // se acepta el legacy (usuario que nunca migro).
+            if ($bcrypt !== '') {
+                $ok = password_verify($cpassw, $bcrypt);
+            } else {
+                $ok = $legacy !== '' && hash_equals($legacy, $cpassw);
+            }
             if (!$ok) {
                 Json::respond(0);
             }

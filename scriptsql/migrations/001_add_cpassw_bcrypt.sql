@@ -75,8 +75,11 @@ CREATE PROCEDURE [dbo].[webDatpos_actualizarPasswordHash]
 AS
 BEGIN
     SET NOCOUNT ON;
+    -- Importante: limpiar cpassw legacy para evitar que la password vieja
+    -- siga siendo aceptada por el fallback plaintext del backend.
     UPDATE dbo.Usuarios
-       SET cpassw_bcrypt = @cpassw_bcrypt
+       SET cpassw_bcrypt = @cpassw_bcrypt,
+           cpassw        = ''
      WHERE ccod_usuario = @ccod_usuario;
 END;
 GO
@@ -91,8 +94,11 @@ ALTER PROCEDURE [dbo].[webDatpos_cambiarContrasena]
 AS
 BEGIN
     SET NOCOUNT ON;
+    -- Importante: limpiar cpassw legacy para evitar que la password vieja
+    -- siga siendo aceptada por el fallback plaintext del backend.
     UPDATE dbo.Usuarios
-       SET cpassw_bcrypt = @cpassw_bcrypt
+       SET cpassw_bcrypt = @cpassw_bcrypt,
+           cpassw        = ''
      WHERE ccod_usuario = @ccod_usuario;
     SELECT CAST(@@ROWCOUNT AS INT) AS resultado;
 END;
@@ -115,11 +121,13 @@ ALTER PROCEDURE [dbo].[webDatpos_insertarUsuarioAdmin]
 AS
 BEGIN
     SET NOCOUNT ON;
+    -- cpassw legacy queda en '' para que la password vieja nunca pueda
+    -- autenticar via el fallback plaintext.
     INSERT INTO dbo.Usuarios
-        (ccod_usuario, cdsc_usuario, cpassw_bcrypt, cdirec, id_rol, ccod_empresa,
-         cmail, ctelf, ccelular, id_estado)
+        (ccod_usuario, cdsc_usuario, cpassw, cpassw_bcrypt, cdirec,
+         id_rol, ccod_empresa, cmail, ctelf, ccelular, id_estado)
     VALUES
-        (@ccod_usuario, @cdsc_usuario, @cpassw_bcrypt, ISNULL(@cdirec, ''),
+        (@ccod_usuario, @cdsc_usuario, '', @cpassw_bcrypt, ISNULL(@cdirec, ''),
          @id_rol, @ccod_empresa,
          ISNULL(@cmail, ''), ISNULL(@ctelf, ''), ISNULL(@ccelular, ''),
          CASE WHEN @cstatus = 'A' OR @cstatus = '1' THEN 1 ELSE 0 END);
@@ -144,12 +152,19 @@ ALTER PROCEDURE [dbo].[webDatpos_editarUsuarioAdmin]
 AS
 BEGIN
     SET NOCOUNT ON;
+    -- Cuando llega @cpassw_bcrypt no vacio, ademas pisa cpassw legacy a ''
+    -- para que la password vieja deje de autenticar via fallback.
     UPDATE dbo.Usuarios
        SET cdsc_usuario  = @cdsc_usuario,
            cpassw_bcrypt = CASE
                               WHEN @cpassw_bcrypt IS NULL OR @cpassw_bcrypt = ''
                                   THEN cpassw_bcrypt
                               ELSE @cpassw_bcrypt
+                           END,
+           cpassw        = CASE
+                              WHEN @cpassw_bcrypt IS NULL OR @cpassw_bcrypt = ''
+                                  THEN cpassw
+                              ELSE ''
                            END,
            cdirec        = ISNULL(@cdirec, ''),
            id_rol        = @id_rol,
