@@ -27,6 +27,16 @@ class Jwt
     private static ?array $cfgCache = null;
 
     /**
+     * Resuelve la configuracion en este orden de prioridad (mas alto gana):
+     *   1. Variables de entorno (`JWT_SECRET`, `JWT_ISSUER`, ...)
+     *   2. `php/config/config.php['jwt']`
+     *   3. Defaults hardcodeados.
+     *
+     * Las env vars se aplican como override **solo si estan definidas**
+     * (`getenv() !== false`). Esto permite usar valores legitimos como
+     * `JWT_LEEWAY=0` (que con el operador `?:` se confundiria con "no
+     * seteado" y caeria al default).
+     *
      * @return array{secret:string,issuer:string,audience:string,access_ttl:int,refresh_ttl:int,leeway:int}
      */
     private static function cfg(): array
@@ -35,15 +45,17 @@ class Jwt
             return self::$cfgCache;
         }
 
+        // 3. Defaults
         $cfg = [
-            'secret'      => (string)(getenv('JWT_SECRET') ?: ''),
-            'issuer'      => (string)(getenv('JWT_ISSUER')   ?: 'datpos-admin'),
-            'audience'    => (string)(getenv('JWT_AUDIENCE') ?: 'datpos-admin-web'),
-            'access_ttl'  => (int)(getenv('JWT_ACCESS_TTL')  ?: 3600),         // 1h
-            'refresh_ttl' => (int)(getenv('JWT_REFRESH_TTL') ?: 60 * 60 * 24 * 7), // 7d
-            'leeway'      => (int)(getenv('JWT_LEEWAY')      ?: 30),           // 30s clock skew
+            'secret'      => '',
+            'issuer'      => 'datpos-admin',
+            'audience'    => 'datpos-admin-web',
+            'access_ttl'  => 3600,                  // 1h
+            'refresh_ttl' => 60 * 60 * 24 * 7,      // 7d
+            'leeway'      => 30,                    // 30s clock skew
         ];
 
+        // 2. Config file (override de defaults)
         $configFile = __DIR__ . '/../config/config.php';
         if (file_exists($configFile)) {
             $appCfg = require $configFile;
@@ -51,6 +63,33 @@ class Jwt
                 $cfg = array_merge($cfg, $appCfg['jwt']);
             }
         }
+
+        // 1. Env vars (override de config + defaults). `getenv()` devuelve
+        // false si la var no esta definida; cualquier valor explicito (incluso
+        // string "0") se respeta.
+        $envMap = [
+            'secret'      => 'JWT_SECRET',
+            'issuer'      => 'JWT_ISSUER',
+            'audience'    => 'JWT_AUDIENCE',
+            'access_ttl'  => 'JWT_ACCESS_TTL',
+            'refresh_ttl' => 'JWT_REFRESH_TTL',
+            'leeway'      => 'JWT_LEEWAY',
+        ];
+        foreach ($envMap as $key => $envName) {
+            $val = getenv($envName);
+            if ($val !== false) {
+                $cfg[$key] = $val;
+            }
+        }
+
+        // Cast a los tipos esperados (los valores podrian venir como string
+        // desde env vars).
+        $cfg['secret']      = (string)$cfg['secret'];
+        $cfg['issuer']      = (string)$cfg['issuer'];
+        $cfg['audience']    = (string)$cfg['audience'];
+        $cfg['access_ttl']  = (int)$cfg['access_ttl'];
+        $cfg['refresh_ttl'] = (int)$cfg['refresh_ttl'];
+        $cfg['leeway']      = (int)$cfg['leeway'];
 
         if ($cfg['secret'] === '') {
             throw new RuntimeException(
