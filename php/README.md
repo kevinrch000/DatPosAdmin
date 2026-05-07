@@ -47,6 +47,8 @@ php/
   - `pdo_sqlsrv` y `sqlsrv` (Microsoft drivers para SQL Server)
   - `mbstring`
 - **ODBC Driver 18 for SQL Server** (`msodbcsql18` en Linux).
+- **Composer 2.x** ([instalar](https://getcomposer.org/download/)) – maneja
+  las dependencias PHP (`firebase/php-jwt`, etc.).
 
 ### Instalar el driver y las extensiones (Ubuntu 22.04)
 
@@ -98,7 +100,44 @@ echo -e "extension=sqlsrv.so\nextension=pdo_sqlsrv.so" \
    # Editar config.php con server / dbname / user / pass.
    ```
 
-4. **Levantar el servidor** (desarrollo):
+4. **Instalar dependencias PHP (Composer)**:
+
+   ```bash
+   cd php
+   composer install --no-dev --no-interaction
+   ```
+
+   Esto crea `php/vendor/` con `firebase/php-jwt` (usado por `src/Jwt.php`).
+   El directorio `vendor/` esta en `.gitignore`; ejecutar el comando en cada
+   ambiente.
+
+   Para que `Jwt::issueAccess` / `Jwt::verify` funcionen, definir un secreto
+   (cualquiera de las dos opciones, ambas equivalentes):
+
+   - **Variable de entorno** (recomendado en produccion):
+
+     ```bash
+     export JWT_SECRET="$(openssl rand -base64 48)"
+     ```
+
+   - **`config/config.php`**:
+
+     ```php
+     return [
+         // ... resto de config ...
+         'jwt' => [
+             'secret'      => '...al menos 32 bytes aleatorios...',
+             // 'access_ttl'  => 3600,        // opcional, default 1h
+             // 'refresh_ttl' => 60*60*24*7,  // opcional, default 7d
+         ],
+     ];
+     ```
+
+   `src/Jwt.php` queda **listo para usar pero todavia NO esta integrado en
+   el flujo de login**. La integracion (cookies HttpOnly, refresh, logout)
+   se aplica en un PR aparte.
+
+5. **Levantar el servidor** (desarrollo):
 
    ```bash
    php -S localhost:8080 -t php/public
@@ -106,6 +145,11 @@ echo -e "extension=sqlsrv.so\nextension=pdo_sqlsrv.so" \
 
    Abrir <http://localhost:8080>. El index redirige a `Account/Login.php`.
    Login inicial: **`admin`** / **`admin`** (cambiar antes de produccion).
+
+> **Nota seguridad**: las contrasenas se guardan en
+> `Usuarios.cpassw_bcrypt` (bcrypt). La columna legacy `Usuarios.cpassw`
+> se mantiene vacia despues del primer login de cada usuario; el flujo
+> de validacion solo usa el hash. Ver `scriptsql/migrations/001_add_cpassw_bcrypt.sql`.
 
 ## Mapeo Web Methods (.aspx) -> endpoints PHP
 

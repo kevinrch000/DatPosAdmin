@@ -1,0 +1,19 @@
+{
+    "name": "datpos/admin",
+    "description": "Administrative portal for DatPos POS system (PHP backend).",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.0",
+        "firebase/php-jwt": "^7.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
