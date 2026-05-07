@@ -52,7 +52,7 @@ class DAUsuario
         return Db::execSp('webDatpos_insertarUsuarioAdmin', [
             $obj->ccod_usuario,
             $obj->cdsc_usuario,
-            $obj->cpassw,
+            self::hashPassword($obj->cpassw),
             $obj->cdirec,
             (int)$obj->id_rol,
             $obj->ccod_empresa,
@@ -65,10 +65,12 @@ class DAUsuario
 
     public function EditarUsuarioAdmin(BEUsuario $obj): bool
     {
+        // Si la pantalla envia password vacio, mandamos string vacio: el SP
+        // lo interpreta como "no cambiar" y conserva el hash actual.
         return Db::execSp('webDatpos_editarUsuarioAdmin', [
             $obj->ccod_usuario,
             $obj->cdsc_usuario,
-            $obj->cpassw,
+            self::hashPassword($obj->cpassw),
             $obj->cdirec,
             (int)$obj->id_rol,
             $obj->ccod_empresa,
@@ -77,6 +79,18 @@ class DAUsuario
             $obj->ctelf,
             $obj->ccelular,
         ]);
+    }
+
+    /**
+     * Hashea con bcrypt si hay password; si llega vacio, devuelve string vacio
+     * (los SPs de admin interpretan vacio como "no cambiar").
+     */
+    private static function hashPassword(string $plain): string
+    {
+        if ($plain === '') {
+            return '';
+        }
+        return password_hash($plain, PASSWORD_DEFAULT);
     }
 
     public function EliminarUsuarioAdmin(string $cod, ?BEUser $obj = null): bool

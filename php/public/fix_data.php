@@ -70,19 +70,20 @@ echo '<h2>2. Corregir contraseña del usuario "admin"</h2>';
 
 try {
     // Mostrar valor actual
-    $user = $pdo->query("SELECT ccod_usuario, cpassw FROM Usuarios WHERE ccod_usuario = 'admin'")->fetch();
+    $user = $pdo->query("SELECT ccod_usuario, cpassw, ISNULL(cpassw_bcrypt, '') AS cpassw_bcrypt FROM Usuarios WHERE ccod_usuario = 'admin'")->fetch();
     if ($user) {
-        echo '<p class="warn">Contraseña actual: "' . htmlspecialchars($user['cpassw']) . '"</p>';
+        echo '<p class="warn">cpassw legacy: "' . htmlspecialchars($user['cpassw']) . '"</p>';
+        echo '<p class="warn">cpassw_bcrypt: ' . ($user['cpassw_bcrypt'] !== '' ? '(hash presente)' : '(vacio)') . '</p>';
 
-        // Actualizar contraseña a "admin"
-        $stmt = $pdo->prepare("UPDATE Usuarios SET cpassw = ? WHERE ccod_usuario = ?");
-        $stmt->execute(['admin', 'admin']);
+        // Actualizar contraseña a "admin" (hash bcrypt)
+        $stmt = $pdo->prepare("UPDATE Usuarios SET cpassw_bcrypt = ?, cpassw = '' WHERE ccod_usuario = ?");
+        $stmt->execute([password_hash('admin', PASSWORD_DEFAULT), 'admin']);
         $affected = $stmt->rowCount();
 
         if ($affected > 0) {
-            echo '<p class="ok">✔ Contraseña actualizada a "admin"</p>';
+            echo '<p class="ok">✔ Contraseña reseteada a "admin" (bcrypt)</p>';
         } else {
-            echo '<p class="warn">⚠ No se actualizo (ya tenia esa contraseña?)</p>';
+            echo '<p class="warn">⚠ No se actualizo (usuario no existe?)</p>';
         }
     } else {
         echo '<p class="err">✖ Usuario "admin" no encontrado</p>';
@@ -97,7 +98,9 @@ try {
 echo '<h2>3. Verificacion: test login admin/admin</h2>';
 
 try {
-    $testRows = Database::selectStored('webDatpos_validarUsuario', ['admin', 'admin']);
+    require_once __DIR__ . '/../src/BL/BLUser.php';
+    $bl = new BLUser();
+    $testRows = $bl->ValidarUsuario('admin', 'admin');
     if ($testRows && count($testRows) > 0) {
         echo '<p class="ok">✔ Login "admin"/"admin" EXITOSO (' . count($testRows) . ' fila)</p>';
         echo '<pre>' . htmlspecialchars(print_r($testRows[0], true)) . '</pre>';
