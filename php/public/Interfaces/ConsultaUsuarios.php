@@ -22,16 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     (string)($body['estado'] ?? '')
                 );
                 Json::respond(array_map(fn($r) => [
-                    'ccod_empresa' => (string)($r['ccod_empresa'] ?? ''),
-                    'cdsc_empresa' => (string)($r['cdsc_empresa'] ?? ''),
-                    'ccod_usuario' => (string)($r['ccod_usuario'] ?? ''),
-                    'cdsc_usuario' => (string)($r['cdsc_usuario'] ?? ''),
-                    'cdir_usuario' => (string)($r['cdirec'] ?? ''),
-                    'cdsc_rol'     => (string)($r['cdsc_rol'] ?? ''),
-                    'cpais_origen' => (string)($r['cdsc_departamento'] ?? ''),
-                    'cstatus'      => (string)($r['id_estado'] ?? ''),
-                    'ccelular'     => (string)($r['ccelular'] ?? ''),
-                ], $rows));
+    'ccod_empresa' => (string)($r['ccod_empresa'] ?? ''),
+    'cdsc_empresa' => (string)($r['cdsc_empresa'] ?? ''),
+    'ccod_usuario' => (string)($r['ccod_usuario'] ?? ''),
+    'cdsc_usuario' => (string)($r['cdsc_usuario'] ?? ''),
+    'cdir_usuario' => (string)($r['cdirec'] ?? ''),
+    'cdsc_rol'     => (string)($r['cdsc_rol'] ?? ''),
+    'cpais_origen' => (string)($r['cdsc_departamento'] ?? ''),
+    'cstatus'      => ((string)($r['id_estado'] ?? '') === '1')
+                        ? 'Activo'
+                        : 'Inactivo',
+    'ccelular'     => (string)($r['ccelular'] ?? ''),
+], $rows));
             case 'ConsultaUsuariosPorEmpresa':
                 $rows = $bl->ConsultaUsuariosPorEmpresa((string)($body['empresa'] ?? ''));
                 Json::respond(array_map(fn($r) => [

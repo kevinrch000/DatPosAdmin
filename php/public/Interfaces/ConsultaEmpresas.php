@@ -31,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     'cnombre_bd'       => (string)($r['cnombre_bd'] ?? ''),
                     'cpais_origen'     => (string)($r['Pais'] ?? ''),
                     'ctarifas'         => (string)($r['Tarifa'] ?? ''),
-                    'cstatus'          => (string)($r['id_estado'] ?? ''),
+                    'cstatus' => ((string)($r['id_estado'] ?? '') === '1')
+    ? 'Activo'
+    : 'Inactivo',
                 ], $rows));
             case 'ConsultaUsuariosPorEmpresa':
                 $rows = (new BLConsultaUsuarios())->ConsultaUsuariosPorEmpresa((string)($body['empresa'] ?? ''));

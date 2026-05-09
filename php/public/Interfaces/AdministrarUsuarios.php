@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     'cdsc_rol'     => (string)($r['cdsc_rol'] ?? ''),
                     'ccelular'     => (string)($r['ccelular'] ?? ''),
                     'cmail'        => (string)($r['cmail'] ?? ''),
-                    'cstatus'      => (string)($r['id_estado'] ?? ''),
+                    'cstatus' => ((string)($r['id_estado'] ?? '') === '1')
+                        ? 'Activo'
+                        : 'Inactivo',
                 ], $rows));
                 break;
             case 'TablaEmpresas':
@@ -48,9 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
                     'cdsc_usuario' => (string)($r['cdsc_usuario'] ?? ''),
                     'cpassw'       => (string)($r['cpassw'] ?? ''),
                     'cdirec'       => (string)($r['cdirec'] ?? ''),
-                    'id_rol'       => (string)($r['id_rol'] ?? ''),
+                    'id_rol' => match ((string)($r['id_rol'] ?? '')) {
+    '1' => 'Administrador Master',
+    '2' => 'Administrador Empresa',
+    default => 'Sin Rol'
+},
                     'ccod_empresa' => (string)($r['ccod_empresa'] ?? ''),
-                    'cstatus'      => (string)($r['id_estado'] ?? ''),
+                    'cstatus' => ((string)($r['id_estado'] ?? '') === '1')
+    ? 'Activo'
+    : 'Inactivo',
                     'dfch_crea'    => (string)($r['dfch_crea'] ?? ''),
                 ], $rows));
                 break;
