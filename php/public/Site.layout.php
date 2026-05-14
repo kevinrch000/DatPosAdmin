@@ -58,6 +58,7 @@ function site_layout_header(string $titulo = 'Administración', string $extraHea
 
     <script src="<?= $base ?>/assets/Javascript/FileSaver.js"></script>
     <?= $extraHead ?>
+    <script>window.DATPOS_BASE_PATH = '<?= $base ?>';</script>
     <style>
         h1 { position: relative; float: left; background: rgb(238,244,247); color: Black; font-size: 2.5em; }
         .navbar-default { background-color: #f8f8f800; border-color: #f8f8f800; }
@@ -133,9 +134,9 @@ function site_layout_header(string $titulo = 'Administración', string $extraHea
             <li class="dropdown" style="list-style:none; top:-4px;">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="material-icons">settings</i></a>
                 <ul class="dropdown-menu" style="left:-161px;">
-                    <li><a href="#">Mi perfil</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#MoCambioPass" onclick="LimpiarPopUp();">Cambiar Contraseña</a></li>
-                    <li><a href="#">Configuracion</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#ModalMiPerfil">Mi perfil</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#ModalCambiarContrasena" onclick="LimpiarCambiarContrasena();">Cambiar Contraseña</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#ModalAcercaDe">Configuración</a></li>
                 </ul>
             </li>
         </div>
@@ -148,8 +149,116 @@ function site_layout_header(string $titulo = 'Administración', string $extraHea
 
 function site_layout_footer(): void
 {
+    $user = Auth::user();
+    $usuario = $user ? htmlspecialchars($user->cdsc_usuario) : '';
+    $empresa = $user ? htmlspecialchars($user->cdsc_empresa) : '';
     ?>
 </div><!-- /#content -->
+
+    <!-- Modal Mi Perfil -->
+    <div class="modal fade" id="ModalMiPerfil" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="padding: 60px;">
+            <div class="modal-content" style="background-color:#ddd;">
+                <div class="modal-header" style="background: #d6d5d5;">
+                    <div class="col-sm-6">
+                        <h3 class="modal-title">Datos Generales</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <table class="table" style="border:0px;">
+                        <tr>
+                            <td style="border:0px;font-weight:bold;color:#333;"><?= $empresa ?></td>
+                        </tr>
+                    </table>
+                    <table class="table" style="border:0px;">
+                        <tr>
+                            <td style="border:0px;width:30%;color:#333;">Usuario:</td>
+                            <td style="border:0px;width:70%;color:#333;"><?= $usuario ?> (<?= htmlspecialchars($user->ccod_usuario ?? '') ?>)</td>
+                        </tr>
+                        <tr>
+                            <td style="border:0px;width:30%;color:#333;">Rol:</td>
+                            <td style="border:0px;width:70%;color:#333;"><?= htmlspecialchars($user->id_rol ?? '') ?></td>
+                        </tr>
+                        <tr>
+                            <td style="border:0px;width:30%;color:#333;">Empresa:</td>
+                            <td style="border:0px;width:70%;color:#333;"><?= $empresa ?> (<?= htmlspecialchars($user->ccod_empresa ?? '') ?>)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cambiar Contraseña -->
+    <div class="modal fade" id="ModalCambiarContrasena" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="margin: 90px;">
+                <div class="modal-header">
+                    <div class="col-sm-11">
+                        <h3 class="modal-title">Cambiar Contraseña</h3>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <input id="inContraActual" type="password" class="form-control" maxlength="50"
+                                placeholder="Contraseña actual" />
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <input id="inContraNueva" type="password" class="form-control" maxlength="50"
+                                placeholder="Nueva contraseña" />
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <input id="inContraRepetir" type="password" class="form-control" maxlength="50"
+                                placeholder="Repetir contraseña" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="CambiarContrasena();">Guardar Contraseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Acerca De (Configuración) -->
+    <div class="modal fade" id="ModalAcercaDe" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="margin: 90px;">
+                <div class="modal-header">
+                    <div class="col-sm-11">
+                        <h3 class="modal-title">Acerca de</h3>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                </div>
+                <div class="modal-body" style="text-align:center;">
+                    <img src="<?= Auth::base_path() ?>/assets/Styles/img/icon/icon_LogoCircle.png"
+                        style="width:50px;display:block;margin:0 auto;margin-top:20px;" />
+                    <p style="margin-top:4%;">Portal de Administración - DATPOS</p>
+                    <p>Versión: 1.0.0-PHP</p>
+                    <p>2026</p>
+                    <p>© Copyright 2026 - Todos los Derechos reservados DATPOS</p>
+                    <p>Soporte TELF. (511) 225-7622, (511) 224-5241</p>
+                    <p style="margin-top:30px;"><b>Advertencia:</b> Todos los derechos reservados DATPOS SAC.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none">
     <div class="input-group">

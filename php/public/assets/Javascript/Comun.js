@@ -61,6 +61,7 @@ function PerdidaFoco(obj) {
 }
 
 function MensajeFinSession(){
+    var bp = window.DATPOS_BASE_PATH || '';
     Swal.fire({
         title: "Tiempo de sesión expirado.",
         icon: 'warning',
@@ -69,7 +70,7 @@ function MensajeFinSession(){
     }).then(
         (result) => {
             if (result.value) {
-                window.location.replace("/Account/Login.php");
+                window.location.replace(bp + "/Account/Login.php");
             }
    });  
 }
@@ -228,6 +229,59 @@ function Limpiar() {
             this.selectedIndex = 0;
         } else {
             $(this).val("");
+        }
+    });
+}
+
+function LimpiarCambiarContrasena() {
+    $("#inContraActual").val("");
+    $("#inContraNueva").val("");
+    $("#inContraRepetir").val("");
+}
+
+function CambiarContrasena() {
+    if ($('#inContraActual').val() === "") {
+        Mensaje('Advertencia', 'Ingresar contraseña actual.', 'warning');
+        return;
+    }
+    if ($('#inContraNueva').val() === "") {
+        Mensaje('Advertencia', 'Ingresar nueva contraseña.', 'warning');
+        return;
+    }
+    if ($('#inContraRepetir').val() === "") {
+        Mensaje('Advertencia', 'Repetir la contraseña.', 'warning');
+        return;
+    }
+    if ($('#inContraNueva').val() !== $('#inContraRepetir').val()) {
+        Mensaje('Advertencia', 'La nueva contraseña no coincide.', 'warning');
+        return;
+    }
+    if ($('#inContraActual').val() === $('#inContraNueva').val()) {
+        Mensaje('Advertencia', 'La nueva contraseña debe ser diferente a la actual.', 'warning');
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: (window.DATPOS_BASE_PATH || '') + '/Account/ChangePassword.php?action=cambiar',
+        data: JSON.stringify({
+            cpassw: $('#inContraActual').val(),
+            newpassw: $('#inContraNueva').val()
+        }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (response) {
+            if (response.d == 1) {
+                Mensaje('Correcto', 'Contraseña actualizada correctamente.', 'success');
+                $("#ModalCambiarContrasena").modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            } else {
+                Mensaje('Error', 'La contraseña actual no es correcta.', 'error');
+            }
+        },
+        error: function (xhr) {
+            Mensaje('Error', 'Error al cambiar la contraseña.', 'error');
         }
     });
 }
